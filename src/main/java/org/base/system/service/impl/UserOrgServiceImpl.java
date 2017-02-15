@@ -7,7 +7,7 @@ import org.base.frame.util.Finder;
 import org.base.system.entity.Org;
 import org.base.system.entity.User;
 import org.base.system.entity.UserOrg;
-import org.base.system.service.BaseSpringrainServiceImpl;
+import org.base.system.service.BaseSpringServiceImpl;
 import org.base.system.service.IUserOrgService;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +19,7 @@ import org.springframework.stereotype.Service;
  * @see org.springrain.springrain.service.impl.TuserOrg
  */
 @Service("userOrgService")
-public class UserOrgServiceImpl extends BaseSpringrainServiceImpl implements IUserOrgService {
+public class UserOrgServiceImpl extends BaseSpringServiceImpl implements IUserOrgService {
 
 	@Override
 	public List<User> findUserByOrgId(String orgId) throws Exception {

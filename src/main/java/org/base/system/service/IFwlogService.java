@@ -8,7 +8,7 @@ import org.base.system.entity.Fwlog;
  * @version  2013-07-29 11:36:44
  * @see org.springrain.springrain.service.Fwlog
  */
-public interface IFwlogService extends IBaseSpringrainService {
+public interface IFwlogService extends IBaseSpringService {
 	
 	/**
 	 * 根据ID查找

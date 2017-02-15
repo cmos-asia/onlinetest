@@ -13,7 +13,7 @@ import org.base.system.entity.User;
  * @version  2013-07-06 15:28:18
  * @see org.springrain.springrain.service.TuserOrg
  */
-public interface IUserOrgService extends IBaseSpringrainService {
+public interface IUserOrgService extends IBaseSpringService {
 
 	
 	/**

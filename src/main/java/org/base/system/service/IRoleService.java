@@ -9,7 +9,7 @@ import org.base.system.entity.Role;
  * @version  2013-07-06 16:02:59
  * @see org.springrain.springrain.service.Role
  */
-public interface IRoleService extends IBaseSpringrainService {
+public interface IRoleService extends IBaseSpringService {
 /**
 	 * 保存 
 	 * @param entity

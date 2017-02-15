@@ -14,7 +14,7 @@ import org.base.frame.util.Page;
 import org.base.system.entity.Menu;
 import org.base.system.entity.Role;
 import org.base.system.entity.RoleMenu;
-import org.base.system.service.BaseSpringrainServiceImpl;
+import org.base.system.service.BaseSpringServiceImpl;
 import org.base.system.service.IRoleService;
 import org.base.system.service.IUserRoleMenuService;
 import org.springframework.cache.annotation.CacheEvict;
@@ -28,7 +28,7 @@ import org.springframework.stereotype.Service;
  * @see org.springrain.springrain.service.impl.Role
  */
 @Service("roleService")
-public class RoleServiceImpl extends BaseSpringrainServiceImpl implements IRoleService {
+public class RoleServiceImpl extends BaseSpringServiceImpl implements IRoleService {
 	@Resource
 private IUserRoleMenuService userRoleMenuService;
    

@@ -17,7 +17,7 @@ import org.base.system.entity.Role;
 import org.base.system.entity.RoleMenu;
 import org.base.system.entity.User;
 import org.base.system.entity.UserRole;
-import org.base.system.service.BaseSpringrainServiceImpl;
+import org.base.system.service.BaseSpringServiceImpl;
 import org.base.system.service.IUserRoleMenuService;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -32,7 +32,7 @@ import org.springframework.stereotype.Service;
  * @see org.springrain.springrain.service.impl.UserRole
  */
 @Service("userRoleMenuService")
-public class UserRoleMenuServiceImpl extends BaseSpringrainServiceImpl implements
+public class UserRoleMenuServiceImpl extends BaseSpringServiceImpl implements
 		IUserRoleMenuService {
 	@Resource
 	private CacheManager shiroCacheManager;

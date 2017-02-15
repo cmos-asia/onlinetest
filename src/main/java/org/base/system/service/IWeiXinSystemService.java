@@ -9,7 +9,7 @@ import org.base.system.entity.User;
  * @version  2014-08-20 22:48:34
  * @see com.bibizao.system.entity.Picture
  */
-public interface IWeiXinSystemService extends IBaseSpringrainService {
+public interface IWeiXinSystemService extends IBaseSpringService {
 	
 	/**
 	 * 根据ID查找

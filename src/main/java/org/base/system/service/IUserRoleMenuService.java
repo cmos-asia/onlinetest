@@ -15,7 +15,7 @@ import org.base.system.entity.User;
  * @version  2013-07-06 16:03:00
  * @see org.springrain.springrain.service.UserRole
  */
-public interface IUserRoleMenuService extends IBaseSpringrainService {
+public interface IUserRoleMenuService extends IBaseSpringService {
 /**
  * 根据用户ID 获取角色
  * @param UserId

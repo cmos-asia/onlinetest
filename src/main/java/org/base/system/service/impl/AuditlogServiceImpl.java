@@ -6,7 +6,7 @@ import java.util.List;
 import org.base.frame.util.Finder;
 import org.base.frame.util.Page;
 import org.base.system.entity.AuditLog;
-import org.base.system.service.BaseSpringrainServiceImpl;
+import org.base.system.service.BaseSpringServiceImpl;
 import org.base.system.service.IAuditlogService;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
  * @see org.springrain.springrain.service.impl.AuditLog
  */
 @Service("auditlogService")
-public class AuditlogServiceImpl extends BaseSpringrainServiceImpl implements IAuditlogService {
+public class AuditlogServiceImpl extends BaseSpringServiceImpl implements IAuditlogService {
 
    
     @Override

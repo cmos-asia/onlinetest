@@ -1,0 +1,103 @@
+<#escape x as x?html>
+
+<SCRIPT type="text/javascript">
+<!--
+
+jQuery(document).ready(function(){
+	//回选 下拉框
+	//jQuery("#search_state option[value='是']").prop("selected",true);
+	
+	/*
+	$('.date-picker').datepicker({
+		    autoclose: true,
+		    format: 'yyyy-mm-dd',
+		    language: 'zh-CN'
+		    //,todayBtn: 'linked',
+		    //startDate:new Date(2014,10,27),
+			//endDate:'+60d',
+		    //startDate: '+1d',
+		}).next().on(ace.click_event, function(){
+			$(this).prev().focus();
+		});
+	*/
+	
+	
+	
+	});
+	
+	
+//-->
+</SCRIPT>
+
+
+
+<div class="row">
+	<div class="col-xs-12">
+		<form class="form-horizontal" id="validation-form" method="POST" novalidate="novalidate" action="${ctx}/testrecordinfo/update" > 
+			<input type="hidden" id="id" name="id" value="${(returnDatas.data.id)!''}"/>	
+<!--input  hidden  End-->
+			<div class="form-group">
+				<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="record_id" >记录表ID</label>
+				<div class="col-xs-12 col-sm-9">
+					<div class="clearfix">
+						<input name="record_id" class="col-xs-12 col-sm-6" id="record_id" value="${(returnDatas.data.record_id)!''}"  type="text" />
+					</div><div class="help-block" for="record_id"></div>
+				</div>
+			</div>
+	        <div class="space-2"></div>
+			<div class="form-group">
+				<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="paper_id" >试题表ID</label>
+				<div class="col-xs-12 col-sm-9">
+					<div class="clearfix">
+						<input name="paper_id" class="col-xs-12 col-sm-6" id="paper_id" value="${(returnDatas.data.paper_id)!''}"  type="text" />
+					</div><div class="help-block" for="paper_id"></div>
+				</div>
+			</div>
+	        <div class="space-2"></div>
+			<div class="form-group">
+				<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="paper_info_id" >试题详情表ID</label>
+				<div class="col-xs-12 col-sm-9">
+					<div class="clearfix">
+						<input name="paper_info_id" class="col-xs-12 col-sm-6" id="paper_info_id" value="${(returnDatas.data.paper_info_id)!''}"  type="text" />
+					</div><div class="help-block" for="paper_info_id"></div>
+				</div>
+			</div>
+	        <div class="space-2"></div>
+			<div class="form-group">
+				<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="answer_result" >作答答案</label>
+				<div class="col-xs-12 col-sm-9">
+					<div class="clearfix">
+						<input name="answer_result" class="col-xs-12 col-sm-6" id="answer_result" value="${(returnDatas.data.answer_result)!''}"  type="text" />
+					</div><div class="help-block" for="answer_result"></div>
+				</div>
+			</div>
+	        <div class="space-2"></div>
+			<div class="form-group">
+				<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="answer_score" >作答得分</label>
+				<div class="col-xs-12 col-sm-9">
+					<div class="clearfix">
+						<input name="answer_score" class="col-xs-12 col-sm-6" id="answer_score" value="${(returnDatas.data.answer_score)!''}"  type="text" />
+					</div><div class="help-block" for="answer_score"></div>
+				</div>
+			</div>
+	        <div class="space-2"></div>
+			<div class="form-group">
+				<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="isRight" >是否正确（0：否，1：是）</label>
+				<div class="col-xs-12 col-sm-9">
+					<div class="clearfix">
+						<input name="isRight" class="col-xs-12 col-sm-6" id="isRight" value="${(returnDatas.data.isRight)!''}"  type="text" />
+					</div><div class="help-block" for="isRight"></div>
+				</div>
+			</div>
+	        <div class="space-2"></div>
+		</form>
+		<div class="wizard-actions">
+			<button class="btn btn-success btn-info" data-last="Finish" onclick="commonUpdateForm('validation-form','${ctx}/testrecordinfo/list');">
+				保存
+			</button>
+		</div>
+	</div>
+</div>
+
+
+</#escape>

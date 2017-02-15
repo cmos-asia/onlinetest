@@ -9,7 +9,7 @@ import org.base.system.entity.User;
  * @version  2013-07-06 16:03:00
  * @see org.springrain.springrain.service.User
  */
-public interface IUserService extends IBaseSpringrainService {
+public interface IUserService extends IBaseSpringService {
 /**
 	 * 保存 
 	 * @param entity

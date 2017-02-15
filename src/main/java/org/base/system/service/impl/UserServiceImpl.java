@@ -16,7 +16,7 @@ import org.base.system.entity.Role;
 import org.base.system.entity.User;
 import org.base.system.entity.UserOrg;
 import org.base.system.entity.UserRole;
-import org.base.system.service.BaseSpringrainServiceImpl;
+import org.base.system.service.BaseSpringServiceImpl;
 import org.base.system.service.IUserOrgService;
 import org.base.system.service.IUserRoleMenuService;
 import org.base.system.service.IUserService;
@@ -33,7 +33,7 @@ import org.springframework.stereotype.Service;
  * @see org.springrain.springrain.service.impl.User
  */
 @Service("userService")
-public class UserServiceImpl extends BaseSpringrainServiceImpl implements IUserService {
+public class UserServiceImpl extends BaseSpringServiceImpl implements IUserService {
 	
 	@Resource
 	private IUserOrgService userOrgService;

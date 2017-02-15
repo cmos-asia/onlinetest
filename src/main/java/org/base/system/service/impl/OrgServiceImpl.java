@@ -8,7 +8,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.base.frame.util.Finder;
 import org.base.frame.util.Page;
 import org.base.system.entity.Org;
-import org.base.system.service.BaseSpringrainServiceImpl;
+import org.base.system.service.BaseSpringServiceImpl;
 import org.base.system.service.IOrgService;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +20,7 @@ import org.springframework.stereotype.Service;
  * @see org.springrain.springrain.service.impl.Org
  */
 @Service("orgService")
-public class OrgServiceImpl extends BaseSpringrainServiceImpl implements IOrgService {
+public class OrgServiceImpl extends BaseSpringServiceImpl implements IOrgService {
 
    
     @Override

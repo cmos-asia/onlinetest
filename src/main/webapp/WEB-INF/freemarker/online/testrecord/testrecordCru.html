@@ -1,0 +1,176 @@
+<#escape x as x?html>
+
+<SCRIPT type="text/javascript">
+<!--
+
+jQuery(document).ready(function(){
+	//回选 下拉框
+	//jQuery("#search_state option[value='是']").prop("selected",true);
+	
+	/*
+	$('.date-picker').datepicker({
+		    autoclose: true,
+		    format: 'yyyy-mm-dd',
+		    language: 'zh-CN'
+		    //,todayBtn: 'linked',
+		    //startDate:new Date(2014,10,27),
+			//endDate:'+60d',
+		    //startDate: '+1d',
+		}).next().on(ace.click_event, function(){
+			$(this).prev().focus();
+		});
+	*/
+	
+	
+	
+	});
+	
+	
+//-->
+</SCRIPT>
+
+
+
+<div class="row">
+	<div class="col-xs-12">
+		<form class="form-horizontal" id="validation-form" method="POST" novalidate="novalidate" action="${ctx}/testrecord/update" > 
+			<input type="hidden" id="id" name="id" value="${(returnDatas.data.id)!''}"/>	
+<!--input  hidden  End-->
+			<div class="form-group">
+				<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="student_id" >学生ID</label>
+				<div class="col-xs-12 col-sm-9">
+					<div class="clearfix">
+						<input name="student_id" class="col-xs-12 col-sm-6" id="student_id" value="${(returnDatas.data.student_id)!''}"  type="text" />
+					</div><div class="help-block" for="student_id"></div>
+				</div>
+			</div>
+	        <div class="space-2"></div>
+			<div class="form-group">
+				<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="paper_id" >试题表ID</label>
+				<div class="col-xs-12 col-sm-9">
+					<div class="clearfix">
+						<input name="paper_id" class="col-xs-12 col-sm-6" id="paper_id" value="${(returnDatas.data.paper_id)!''}"  type="text" />
+					</div><div class="help-block" for="paper_id"></div>
+				</div>
+			</div>
+	        <div class="space-2"></div>
+			<div class="form-group">
+				<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="paper_name" >试题名称</label>
+				<div class="col-xs-12 col-sm-9">
+					<div class="clearfix">
+						<input name="paper_name" class="col-xs-12 col-sm-6" id="paper_name" value="${(returnDatas.data.paper_name)!''}"  type="text" />
+					</div><div class="help-block" for="paper_name"></div>
+				</div>
+			</div>
+	        <div class="space-2"></div>
+			<div class="form-group">
+				<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="used_time" >做题使用时间</label>
+				<div class="col-xs-12 col-sm-9">
+					<div class="clearfix">
+						<input name="used_time" class="col-xs-12 col-sm-6" id="used_time" value="${(returnDatas.data.used_time)!''}"  type="text" />
+					</div><div class="help-block" for="used_time"></div>
+				</div>
+			</div>
+	        <div class="space-2"></div>
+			<div class="form-group">
+				<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="right_score" >得分</label>
+				<div class="col-xs-12 col-sm-9">
+					<div class="clearfix">
+						<input name="right_score" class="col-xs-12 col-sm-6" id="right_score" value="${(returnDatas.data.right_score)!''}"  type="text" />
+					</div><div class="help-block" for="right_score"></div>
+				</div>
+			</div>
+	        <div class="space-2"></div>
+					<!--日期型-->
+			<div class="form-group">
+				<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="answer_start_time" >作答开始时间</label>
+				<div class="col-xs-12 col-sm-9">
+					<div class="clearfix">
+					 <div class="input-group col-xs-12 col-sm-6">
+						<input name="answer_start_time"  class="form-control date-picker"  id="answer_start_time" readonly="readonly" value="${(returnDatas.data.answer_start_time)!''}"  type="text" />
+					        <span class="input-group-addon">
+								<i class="fa fa-calendar bigger-110"></i>
+							</span>
+					   </div>
+					
+					</div><div class="help-block" for="answer_start_time"></div>
+				</div>
+			</div>
+	        <div class="space-2"></div>
+					<!--日期型-->
+			<div class="form-group">
+				<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="answer_finish_time" >作答结束时间</label>
+				<div class="col-xs-12 col-sm-9">
+					<div class="clearfix">
+					 <div class="input-group col-xs-12 col-sm-6">
+						<input name="answer_finish_time"  class="form-control date-picker"  id="answer_finish_time" readonly="readonly" value="${(returnDatas.data.answer_finish_time)!''}"  type="text" />
+					        <span class="input-group-addon">
+								<i class="fa fa-calendar bigger-110"></i>
+							</span>
+					   </div>
+					
+					</div><div class="help-block" for="answer_finish_time"></div>
+				</div>
+			</div>
+	        <div class="space-2"></div>
+					<!--日期型-->
+			<div class="form-group">
+				<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="create_time" >创建日期</label>
+				<div class="col-xs-12 col-sm-9">
+					<div class="clearfix">
+					 <div class="input-group col-xs-12 col-sm-6">
+						<input name="create_time"  class="form-control date-picker"  id="create_time" readonly="readonly" value="${(returnDatas.data.create_time)!''}"  type="text" />
+					        <span class="input-group-addon">
+								<i class="fa fa-calendar bigger-110"></i>
+							</span>
+					   </div>
+					
+					</div><div class="help-block" for="create_time"></div>
+				</div>
+			</div>
+	        <div class="space-2"></div>
+					<!--日期型-->
+			<div class="form-group">
+				<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="update_time" >修改日期</label>
+				<div class="col-xs-12 col-sm-9">
+					<div class="clearfix">
+					 <div class="input-group col-xs-12 col-sm-6">
+						<input name="update_time"  class="form-control date-picker"  id="update_time" readonly="readonly" value="${(returnDatas.data.update_time)!''}"  type="text" />
+					        <span class="input-group-addon">
+								<i class="fa fa-calendar bigger-110"></i>
+							</span>
+					   </div>
+					
+					</div><div class="help-block" for="update_time"></div>
+				</div>
+			</div>
+	        <div class="space-2"></div>
+			<div class="form-group">
+				<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="status" >状态（0：未做 1：已做）</label>
+				<div class="col-xs-12 col-sm-9">
+					<div class="clearfix">
+						<input name="status" class="col-xs-12 col-sm-6" id="status" value="${(returnDatas.data.status)!''}"  type="text" />
+					</div><div class="help-block" for="status"></div>
+				</div>
+			</div>
+	        <div class="space-2"></div>
+			<div class="form-group">
+				<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="isPass" >是否及格（0：否，1：是）</label>
+				<div class="col-xs-12 col-sm-9">
+					<div class="clearfix">
+						<input name="isPass" class="col-xs-12 col-sm-6" id="isPass" value="${(returnDatas.data.isPass)!''}"  type="text" />
+					</div><div class="help-block" for="isPass"></div>
+				</div>
+			</div>
+	        <div class="space-2"></div>
+		</form>
+		<div class="wizard-actions">
+			<button class="btn btn-success btn-info" data-last="Finish" onclick="commonUpdateForm('validation-form','${ctx}/testrecord/list');">
+				保存
+			</button>
+		</div>
+	</div>
+</div>
+
+
+</#escape>

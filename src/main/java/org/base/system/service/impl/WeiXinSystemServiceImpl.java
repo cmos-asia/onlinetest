@@ -3,12 +3,12 @@ package org.base.system.service.impl;
 import org.apache.commons.lang3.StringUtils;
 import org.base.frame.util.Finder;
 import org.base.system.entity.User;
-import org.base.system.service.BaseSpringrainServiceImpl;
+import org.base.system.service.BaseSpringServiceImpl;
 import org.base.system.service.IWeiXinSystemService;
 import org.springframework.stereotype.Service;
 
 @Service("weiXinSystemService")
-public class WeiXinSystemServiceImpl  extends BaseSpringrainServiceImpl implements IWeiXinSystemService{
+public class WeiXinSystemServiceImpl  extends BaseSpringServiceImpl implements IWeiXinSystemService{
 
 	@Override
 	public User findMemberByweixinId(String weixinId) throws Exception {

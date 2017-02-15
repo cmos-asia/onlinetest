@@ -10,7 +10,7 @@ import org.base.system.entity.DicData;
  * @version  2013-07-31 15:56:45
  * @see org.springrain.springrain.service.DicData
  */
-public interface IDicDataService extends IBaseSpringrainService {
+public interface IDicDataService extends IBaseSpringService {
 	
 	/**
 	 * 根据ID查找

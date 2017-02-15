@@ -9,7 +9,7 @@ import org.base.system.entity.AuditLog;
  * @version  2013-04-02 10:17:31
  * @see org.springrain.springrain.service.AuditLog
  */
-public interface IAuditlogService extends IBaseSpringrainService {
+public interface IAuditlogService extends IBaseSpringService {
 	String saveAuditlog(AuditLog entity) throws Exception;
     String saveorupdateAuditlog(AuditLog entity) throws Exception;
 	Integer updateAuditlog(AuditLog entity) throws Exception;

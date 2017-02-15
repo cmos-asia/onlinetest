@@ -12,13 +12,13 @@ import org.base.frame.util.Finder;
 import org.springframework.stereotype.Service;
 
 @Service("baseSpringrainService")
-public class BaseSpringrainServiceImpl extends BaseServiceImpl implements
-		IBaseSpringrainService {
+public class BaseSpringServiceImpl extends BaseServiceImpl implements
+		IBaseSpringService {
 
 	@Resource
 	IBaseJdbcDao baseSpringrainDao;
 
-	public BaseSpringrainServiceImpl() {
+	public BaseSpringServiceImpl() {
 	}
 
 	@Override

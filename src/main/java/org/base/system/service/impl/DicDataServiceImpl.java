@@ -9,7 +9,7 @@ import org.base.frame.util.Finder;
 import org.base.frame.util.GlobalStatic;
 import org.base.frame.util.Page;
 import org.base.system.entity.DicData;
-import org.base.system.service.BaseSpringrainServiceImpl;
+import org.base.system.service.BaseSpringServiceImpl;
 import org.base.system.service.IDicDataService;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -24,7 +24,7 @@ import org.springframework.stereotype.Service;
  * @see org.springrain.springrain.service.impl.DicData
  */
 @Service("dicDataService")
-public class DicDataServiceImpl extends BaseSpringrainServiceImpl implements IDicDataService {
+public class DicDataServiceImpl extends BaseSpringServiceImpl implements IDicDataService {
 
    
     @Override

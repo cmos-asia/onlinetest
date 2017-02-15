@@ -7,7 +7,7 @@ import org.base.frame.entity.IBaseEntity;
 import org.base.frame.util.Finder;
 import org.base.frame.util.Page;
 import org.base.system.entity.Fwlog;
-import org.base.system.service.BaseSpringrainServiceImpl;
+import org.base.system.service.BaseSpringServiceImpl;
 import org.base.system.service.IFwlogService;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +20,7 @@ import org.springframework.stereotype.Service;
  * @see org.springrain.springrain.service.impl.Fwlog
  */
 @Service("fwlogService")
-public class FwlogServiceImpl extends BaseSpringrainServiceImpl implements IFwlogService {
+public class FwlogServiceImpl extends BaseSpringServiceImpl implements IFwlogService {
 
    
     @Override
