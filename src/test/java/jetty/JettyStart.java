@@ -1,15 +1,14 @@
 package jetty;
 
 import org.eclipse.jetty.server.Server;
- 
 
-
-
-public class JettyStart {  
+public class JettyStart {
 
 	
 	public static final int PORT = 80;
+
 	public static final String CONTEXT = "/online";
+
 	public static void main(String[] args) throws Exception {
 		Server server = JettyUtils.buildDebugServer(PORT, CONTEXT);
 		server.start();
