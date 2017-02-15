@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Implementation-Title: base
+Implementation-Version: 0.0.1-SNAPSHOT
+Implementation-Vendor-Id: org.base
+Build-Jdk: 1.7.0_45
+Built-By: Administrator
+Build-Version: 0.0.1-SNAPSHOT-${maven.build.timestamp}
+Created-By: Maven Integration for Eclipse
+Specification-Title: base
+Implementation-URL: http://git.oschina.net/chunanyong/springrain
+Specification-Version: 0.0.1-SNAPSHOT
+
