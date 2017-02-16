@@ -182,10 +182,10 @@ var ctx="${ctx}";
 					<a href="#" class="navbar-brand">
 						<small>
 							<i class="fa fa-leaf"></i>
-							数字化校园系统
+							在线考试管理平台
 						</small>
 					</a>
-					<ul class="top_menu">
+					<!-- <ul class="top_menu">
 						<li>
 							<a>
 								<img src="${ctx}/images/newtheme/icon01.png">
@@ -218,7 +218,7 @@ var ctx="${ctx}";
 							<img src="${ctx}/images/newtheme/icon06.png">
 							<p>系统设置</p></a>
 						</li>
-					</ul>
+					</ul> -->
 					<!-- /section:basics/navbar.layout.brand -->
 
 					<!-- #section:basics/navbar.toggle -->
@@ -231,13 +231,13 @@ var ctx="${ctx}";
 					
 					<div class="topright">    
 					 	<ul class="nav ace-nav">
-					 		<li class="grey">
+					 	<!--	<li class="grey">
 							<a data-toggle="dropdown" class="dropdown-toggle" href="#">
 								<i class="ace-icon fa fa-tasks"></i>
 								<span class="badge badge-grey">4</span>
 							</a>
 
-							<ul class="dropdown-menu-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
+							 <ul class="dropdown-menu-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
 									<li class="dropdown-header">
 										<i class="ace-icon fa fa-check"></i>
 										4个代办任务
@@ -256,16 +256,16 @@ var ctx="${ctx}";
 										</a>
 									</li>
 								</ul>
-							</li>
+							</li> -->
 
 
-					 		<li class="purple">
+					 		<!--<li class="purple">
 							<a data-toggle="dropdown" class="dropdown-toggle" href="#">
 								<i class="ace-icon fa fa-bell icon-animated-bell"></i>
 								<span class="badge badge-important">8</span>
 							</a>
 
-							<ul class="dropdown-menu-right dropdown-navbar navbar-pink dropdown-menu dropdown-caret dropdown-close">
+							 <ul class="dropdown-menu-right dropdown-navbar navbar-pink dropdown-menu dropdown-caret dropdown-close">
 								<li class="dropdown-header">
 									<i class="ace-icon fa fa-exclamation-triangle"></i>
 									8个通知
@@ -284,9 +284,9 @@ var ctx="${ctx}";
 										<i class="ace-icon fa fa-arrow-right"></i>
 									</a>
 								</li>
-							</ul>
-						</li>
-					 		<li class="green">
+							</ul> 
+						</li>-->
+					 		<!-- <li class="green">
 							<a data-toggle="dropdown" class="dropdown-toggle" href="#">
 								<i class="ace-icon fa fa-envelope icon-animated-vertical"></i>
 								<span class="badge badge-success">5</span>
@@ -309,11 +309,11 @@ var ctx="${ctx}";
 									</a>
 								</li>
 							</ul>
-						</li>
+						</li> -->
 
 						<li class="light-blue">
 							<a data-toggle="dropdown" href="#" class="dropdown-toggle">
-								<img class="nav-user-photo" src="http://localhost:8080/springrain/ace/avatars/user.jpg" alt="Jason's Photo">
+								<img class="nav-user-photo" src="ace/avatars/user.jpg" alt="Jason's Photo">
 								<span class="user-info">
 									<small>欢迎,</small>
 									<@shiro.principal property="name" />
@@ -323,27 +323,38 @@ var ctx="${ctx}";
 							</a>
 
 							<ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-								<li>
-									<a href="#">
+								<!-- <li>
+									<a href="###">
 										<i class="ace-icon fa fa-cog"></i>
 										设置
 									</a>
 								</li>
 
 								<li>
-									<a href="profile.html">
+									<a href="###">
 										<i class="ace-icon fa fa-user"></i>
 										个人信息
 									</a>
-								</li>
+								</li> -->
 
 								<li class="divider"></li>
 
 								<li>
-									<a href="#">
+									<a href="javascript:logout();">
 										<i class="ace-icon fa fa-power-off"></i>
 										退出
 									</a>
+									<script>
+									function logout(){
+										var strFullPath = window.document.location.href;
+										var strPath = window.document.location.pathname;
+										var pos = strFullPath.indexOf(strPath);
+										var prePath = strFullPath.substring(0, pos);
+										var postPath = strPath.substring(0, strPath.substr(1).indexOf('/') + 1);
+										window.location.href=prePath+postPath+"/logout";
+									}
+										
+									</script>
 								</li>
 							</ul>
 						</li>
@@ -607,7 +618,7 @@ var ctx="${ctx}";
 					<div class="footer-content">
 						<span class="bigger-120">
 							<span class="blue bolder">技术支持</span>
-							2015
+							@2017
 						</span>
 
 						&nbsp; &nbsp;

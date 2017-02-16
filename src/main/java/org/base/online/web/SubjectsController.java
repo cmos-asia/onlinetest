@@ -143,6 +143,10 @@ public class SubjectsController extends BaseController {
 			if (subId == -1) {
 				returnObject.setMessage(MessageUtils.ADD_SUCCESS);
 				subjects.setCreate_time(new Date());
+			} else {
+				Subjects oldSubjects = subjectsService.findById(
+						subjects.getId(), Subjects.class);
+				subjects.setCreate_time(oldSubjects.getCreate_time());
 			}
 			subjects.setUpdate_time(new Date());
 			subjectsService.saveorupdate(subjects);

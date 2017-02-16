@@ -1,8 +1,12 @@
 <#escape x as x?html>
 
-<script type="text/javascript" src="${ctx}/js/online/student/student.js"></script>
-
 <script type="text/javascript">
+
+$(document).ready(function(){
+	
+	// 查询栏：筛选条件选择
+    $("#search_sex").val('${(returnDatas.queryBean.sex)!''}');
+});
 
 function deleteStudent(){
 	var id=jQuery("#id").val();
@@ -31,10 +35,10 @@ function deleteStudent(){
             <input type="hidden" name="pageIndex" id="pageIndex" value="${(returnDatas.page.pageIndex)!'1'}"/>
             <input type="hidden" name="sort" id="page_sort" value="${(returnDatas.page.sort)!'desc'}"/>
             <input type="hidden" name="order" id="page_order" value="${(returnDatas.page.order)!'id'}"/>
-			<label for="search_state"><b>是否可用:</b></label> 
-			 <select id="search_state" name="state" class="col-10" >
-				<option value="是">是</option>
-				<option value="否">否</option>
+			<label for="search_sex"><b>性别:</b></label> 
+			 <select id="search_sex" name="sex" class="col-10" >
+				<option value="男">男</option>
+				<option value="女">女</option>
 			</select>
 			<a  href="javascript:mySubmitForm('searchForm');"
 				class="btn btn-purple btn-sm">
@@ -85,8 +89,8 @@ function deleteStudent(){
                         <!--first_end_no_export-->
 						<th id="th_phone" >手机号</th>
 						<th id="th_name" >姓名</th>
+						<th id="th_sex" >性别</th>
 						<th id="th_major" >专业</th>
-						<th id="th_password" >密码</th>
 						<th id="th_create_time" >创建时间</th>
 						<th id="th_update_time" >修改时间</th>
                     </tr>
@@ -162,18 +166,18 @@ function deleteStudent(){
 								${(_data.name)!''}
 							</td>
 							<td >
+								${(_data.sex)!'男'}
+							</td>
+							<td >
 								${(_data.major)!''}
 							</td>
 							<td >
-								${(_data.password)!''}
+								<!--日期型-->
+							${((_data.create_time)?string('yyyy-MM-dd hh:mm:ss'))!''}
 							</td>
 							<td >
 								<!--日期型-->
-							${((_data.create_time)?string('yyyy-MM-dd'))!''}
-							</td>
-							<td >
-								<!--日期型-->
-							${((_data.update_time)?string('yyyy-MM-dd'))!''}
+							${((_data.update_time)?string('yyyy-MM-dd hh:mm:ss'))!''}
 							</td>
 						</tr>
 					</#list>

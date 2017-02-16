@@ -1,8 +1,13 @@
 <#escape x as x?html>
 
-<script type="text/javascript" src="${ctx}/js/online/topictype/topictype.js"></script>
+<!-- <script type="text/javascript" src="${ctx}/js/online/topictype/topictype.js"></script> -->
 
 <script type="text/javascript">
+$(document).ready(function(){
+	
+	// 查询栏：筛选条件选择
+    $("#search_status").val('${(returnDatas.queryBean.status)!''}');
+});
 
 function deleteTopicType(){
 	var id=jQuery("#id").val();
@@ -31,10 +36,11 @@ function deleteTopicType(){
             <input type="hidden" name="pageIndex" id="pageIndex" value="${(returnDatas.page.pageIndex)!'1'}"/>
             <input type="hidden" name="sort" id="page_sort" value="${(returnDatas.page.sort)!'desc'}"/>
             <input type="hidden" name="order" id="page_order" value="${(returnDatas.page.order)!'id'}"/>
-			<label for="search_state"><b>是否可用:</b></label> 
-			 <select id="search_state" name="state" class="col-10" >
-				<option value="是">是</option>
-				<option value="否">否</option>
+			<label for="search_status"><b>是否可用:</b></label> 
+			 <select id="search_status" name="status" class="col-10" >
+				<option value="">全部</option>
+				<option value="1">生效</option>
+				<option value="0">无效</option>
 			</select>
 			<a  href="javascript:mySubmitForm('searchForm');"
 				class="btn btn-purple btn-sm">
@@ -86,6 +92,7 @@ function deleteTopicType(){
 						<th id="th_name" >名称</th>
 						<th id="th_create_time" >创建日期</th>
 						<th id="th_update_time" >修改日期</th>
+						<th id="th_status" >生效状态</th>
                     </tr>
                     </thead>
                     <!--first_end_export-->
@@ -157,11 +164,20 @@ function deleteTopicType(){
 							</td>
 							<td >
 								<!--日期型-->
-							${((_data.create_time)?string('yyyy-MM-dd'))!''}
+							${((_data.create_time)?string('yyyy-MM-dd hh:mm:ss'))!''}
 							</td>
 							<td >
 								<!--日期型-->
-							${((_data.update_time)?string('yyyy-MM-dd'))!''}
+							${((_data.update_time)?string('yyyy-MM-dd hh:mm:ss'))!''}
+							</td>
+							<td >
+								<#if (_data.status??)&&(_data.status=1)>
+									<font color="green">有效</font>
+								<#elseif (_data.status??)&&(_data.status=0)>
+									<font color="red">无效</font>
+								<#else>
+									未知
+								</#if>
 							</td>
 						</tr>
 					</#list>
