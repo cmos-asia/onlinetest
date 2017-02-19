@@ -1,0 +1,18 @@
+var date = new Date();
+var year = date.getFullYear();
+document.writeln("<div id=\"footer\">");
+document.writeln("<div class=\"a2\">");
+document.writeln("<a target=\"_blank\" href=\"#\">关于我们</a> ┊");
+document.writeln("<a target=\"_blank\" href=\"#\">付款方式</a> ┊");
+document.writeln("<a target=\"_blank\" href=\"#\">合作推广</a>┊");
+document.writeln("<a target=\"_blank\" href=\"#\">联系我们</a> ┊ ");
+document.writeln("<a target=\"_blank\" href=\"#\"> 教师合作</a> ┊");
+document.writeln("<a target=\"_blank\" href=\"#\">网站地图</a>┊");
+document.writeln("<a target=\"_blank\" href=\"#\">网站声明</a> ┊");
+document.writeln("<a target=\"_blank\" href=\"#\">友情链接</a> ┊ ");
+document.writeln("<a target=\"_blank\" href=\"#\">帮助中心</a> ┊ ");
+document.writeln("<a target=\"_blank\" href=\"#\">触屏版</a><br>");
+document.writeln("<span>版权所有 &copy; " + year+"<br>");
+document.writeln("服务时间：周一至周日 8:30-22:30 法定节假日：8:30-17:30<br>");
+document.writeln("</div>");
+document.writeln("</div>");

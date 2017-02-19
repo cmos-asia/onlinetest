@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+        <title>在线测试中心</title>
+        <link href="./assets/nav.css" rel="stylesheet" type="text/css" />
+        <style>
+        #headerbox {
+        position: relative;
+        }
+        </style>
+        <link rel="stylesheet" href="./assets/index.css">
+        <link rel="stylesheet" href="./assets/list.css">
+    </head>
+    <body>
+        <div id="top-wrap">
+            <div class="top-nav-wrap" id="headerbox">
+                <div class="tn-header">
+                    <div class="tn-nav">
+                    </div>
+                    <div class="tn-person-r">
+                        <!-- nologin -->
+                        <div class="tn-title" id="nologinbox"><a href="./login.html"  target="_self" class="tn-tab"><em class="denglu"></em>登录</a><b>|</b><a href="./register.html" onClick="return ghead.register();" target="_self" class="tn-tab ui-denglu">注册</a>
+                    </div>
+                    <!-- end -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="main_content clearfix">
+        <div class="main_content clearfix">
+            <div class="le-prabg test-classificon-t clearfix clear">
+                <div class="navleft clearfix">
+                    <div class="tk-box clearfix">
+                        <dl>
+                            <dd class=""><a href="javascript:void(0)"><i class="home"></i>首页</a></dd>
+                        </dl>
+                        <dl>
+                            <dt>我的题库</dt>
+                            <dd class="this"><a href="javascript:void(0)"><i class="myexam"></i>开始做题</a></dd>
+                        </dl>
+                    </div>
+                </div>
+                <!--右侧中间部分-->
+                <div class="test-clawidth-more bor" id="class_frame">
+                    <div class="pracl-dalist bor">
+                        <div class="paper-tit">
+                            <a href="javascript:void(0)">默认</a>
+                        </div>
+                        <ul>
+                            <li>
+                                <span class="dal-but">
+                                    <a target="_blank" href="#" class="downPage"> 下载试卷 </a>
+                                    <a target="_parent" href="#" class="zt-go"> 开始做题 </a>
+                                </span> <i class="ico moni"></i>
+                                <div class="">
+                                    <h3>
+                                    <a target="_parent" href="#">
+                                    2017年北京会计从业《财经法规》模拟卷(3)                                 </a>
+                                    </h3>
+                                    <p> <span>1114人参考</span> <span><em>质量</em><i class="vso-star"><b style=" width:60%;"></b></i> </span> </p>
+                                </div>
+                            </li>
+                        </ul>
+                        <!--分页 {classId:int}-{paperType}-{area}-{year}-{page}-->
+                        <div class="ui-page" data-invalidpageerrmsg="Page index is invalid" data-outrangeerrmsg="Page index is out of range" data-pagecount="10" data-pageparameter="page" data-pagerid="Webdiyer.MvcPager" id="pageBar">
+                            <a class="ui-page-turn">上一页</a>
+                            <a class="z-on">1</a>
+                            <a href="javascript:void(0)">2</a>
+                            <a href="javascript:void(0)">3</a>
+                            <a href="javascript:void(0)">...</a>
+                            <a href="javascript:void(0)">10</a>
+                            <span class="ui-page-turn"><a href="javascript:void(0)">下一页</a></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<script src="./common/footer.js"></script>
+</body>
+</html>

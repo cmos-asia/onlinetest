@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+        <title>在线考试</title>
+        <link href="./assets/question.css" rel="stylesheet" />
+        <link href="./assets/nav.css" rel="stylesheet" type="text/css" />
+        <style>
+        #headerbox {
+        position: relative;
+        }
+        #questionModule {
+        width: 100%;
+        min-height: 300px;
+        background: none;
+        overflow: hidden;
+        position: relative;
+        }
+        #questionModule > ul {
+        width: 100%;
+        height: auto;
+        }
+        #questionModule.cross-range {
+        margin-bottom: 20px;
+        }
+        #questionModule.cross-range > ul {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        }
+        #questionModule.cross-range > ul > li {
+        float: left;
+        width: 100%;
+        overflow: hidden;
+        }
+        .st_radio{
+            position: absolute;left: 9px;top:12px;
+        }
+        </style>
+        <link rel="stylesheet" href="./assets/index.css">
+    </head>
+    <body>
+        <div id="top-wrap">
+            <div id="top-wrap">
+                <div class="top-nav-wrap" id="headerbox">
+                    <div class="tn-header">
+                    
+                        <div class="tn-person-r">
+                            <!-- nologin -->
+                            <div class="tn-title" id="nologinbox"><a href="./login.html"  target="_self" class="tn-tab"><em class="denglu"></em>登录</a><b>|</b><a href="./register.html" onClick="return ghead.register();" target="_self" class="tn-tab ui-denglu">注册</a>
+                        </div>
+                        <!-- end -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    <div class="pracontent clearfix" style="margin-top: 20px">
+        <div class="m-examHead bor ">
+            <div class="score">
+                <div class="num">90</div>
+                <div class="ico"></div>
+            </div>
+            <!--试卷头信息-->
+            <h2 class="h2"> 2017年北京会计从业《财经法规》模拟卷(3) </h2>
+            <div class="info">
+                <p>◇ 问卷描述</p>
+            </div>
+        </div>
+        </div>
+    </div>
+    <script src="./common/footer.js"></script>
+</body>
+</html>
