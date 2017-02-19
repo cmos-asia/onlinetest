@@ -1,6 +1,6 @@
 <#escape x as x?html>
 
-<script type="text/javascript" src="${ctx}/js/online/testpaperinfo/testpaperinfo.js"></script>
+<!-- <script type="text/javascript" src="${ctx}/js/online/testpaperinfo/testpaperinfo.js"></script> -->
 
 <script type="text/javascript">
 
@@ -15,6 +15,16 @@ function deleteTestPaperInfo(){
 		mydelete(_url,listurl);
 	}
 }
+
+
+function addTestPaperInfo(){
+	var paper_id=$("#paper_id").val();
+	var hrefLink='${ctx}/testpaperinfo/update/pre?paper_id='+paper_id;
+	myhref(hrefLink); 
+}
+
+
+
 </script>
 
 
@@ -27,16 +37,16 @@ function deleteTestPaperInfo(){
 <div class="operate panel panel-default" style="height:65px;">
 	<div class="panel-body">
 		<div class="pull-left">
- <form class="form-horizontal" name="searchForm" id="searchForm" action="${ctx}/testpaperinfo/list" role="form">
+ <form class="form-horizontal" name="searchForm" id="searchForm" action="${ctx}/testpaperinfo/list?paper_id=${(returnDatas.queryBean.paper_id)!'0'}" role="form">
             <input type="hidden" name="pageIndex" id="pageIndex" value="${(returnDatas.page.pageIndex)!'1'}"/>
             <input type="hidden" name="sort" id="page_sort" value="${(returnDatas.page.sort)!'desc'}"/>
             <input type="hidden" name="order" id="page_order" value="${(returnDatas.page.order)!'id'}"/>
-			<label for="search_state"><b>是否可用:</b></label> 
+			<!-- <label for="search_state"><b>是否可用:</b></label> 
 			 <select id="search_state" name="state" class="col-10" >
 				<option value="是">是</option>
 				<option value="否">否</option>
-			</select>
-			<a  href="javascript:mySubmitForm('searchForm');"
+			</select> -->
+			<a  href="javascript:mySubmitForm('searchForm');" style="display:none;"
 				class="btn btn-purple btn-sm">
 					查询 <i class="ace-icon fa fa-search icon-on-right bigger-10"></i>
 				</a>
@@ -51,21 +61,103 @@ function deleteTestPaperInfo(){
                     </button>
 		    	</@shiro.hasPermission>
 			    <@shiro.hasPermission name="/testpaperinfo/update" >
-				  <button onclick="myhref('${ctx}/testpaperinfo/update/pre');" class="btn  btn-sm  btn-primary">
+				  <button onclick="addTestPaperInfo();" class="btn  btn-sm  btn-primary">
                         添加
                     </button>
 			    </@shiro.hasPermission>
 			    <@shiro.hasPermission name="/testpaperinfo/delete" >
-			    |
-				  <button onclick="deleteTestPaperInfo();" class="btn btn-sm btn-danger">
+			     <!-- |
+				 <button onclick="deleteTestPaperInfo();" class="btn btn-sm btn-danger">
                         删除
-                    </button>
+                    </button> -->
 			    </@shiro.hasPermission>
 			
 		</div>
 	</div>
 </div>
 
+
+<div class="row">
+            <div class="col-xs-12">
+	            <!--start_export-->
+                <table id="listDataTable" border="1" class="table table-striped table-bordered table-hover">
+                    <!--end_no_export-->
+                    <!--first_start_export-->
+                    <thead>
+                    <tr>
+                        <!--first_start_no_export-->
+                        <!-- <th class="center">
+                            <label class="position-relative">
+                                <input class="ace" type="checkbox">
+                                <span class="lbl"></span>
+                            </label>
+                        </th> -->
+                        <!--first_end_no_export-->
+						<th>试卷名称</th>
+						<th>科目</th>
+						<th>生效状态</th>
+						<th>作答时间</th>
+						<th>总分</th>
+						<th>及格分数</th>
+						<th>创建日期</th>
+						<th>更新日期</th>
+                    </tr>
+                    </thead>
+                    <!--first_end_export-->
+
+                    <!--start_export-->
+                    <tbody>
+           
+				   <#if returnDatas.otherData??>
+					 <#assign _otherData=returnDatas.otherData>
+					 		<input type="hidden" id="paper_id" value="${(_otherData.id)!''}"/>
+                            <!--start_no_export-->
+                            <tr class="">
+                                <!--end_no_export-->
+
+							<td >
+								${(_otherData.name)!''}
+							</td>
+							<td >
+								<!-- ${(_data.subjects)!0} -->
+								${(_otherData.subjectsName)!''}
+							</td>
+							<td >
+								<#if (_otherData.status??)&&(_otherData.status=1)>
+									<font color="green">有效</font>
+								<#elseif (_otherData.status??)&&(_otherData.status=0)>
+									<font color="red">无效</font>
+								<#else>
+									未知
+								</#if>
+							</td>
+							<td >
+								${(_otherData.answer_time)!0}
+							</td>
+							<td >
+								${(_otherData.total_score)!0}
+							</td>
+							<td >
+								${(_otherData.pass_mark)!0}
+							</td>
+							<td >
+								<!--日期型-->
+							${((_otherData.create_time)?string('yyyy-MM-dd hh:mm:ss'))!''}
+							</td>
+							<td >
+								<!--日期型-->
+							${((_otherData.update_time)?string('yyyy-MM-dd hh:mm:ss'))!''}
+							</td>
+						</tr>
+					 </#if>
+                    </tbody>
+                </table>
+                <!--end_export-->
+            </div>
+            <!-- /.span -->
+        </div>
+
+<!-- 试卷详情记录展示 -->
    <div class="row">
             <div class="col-xs-12">
 	            <!--start_export-->
@@ -75,25 +167,25 @@ function deleteTestPaperInfo(){
                     <thead>
                     <tr>
                         <!--first_start_no_export-->
-                        <th class="center">
+                        <!-- <th class="center">
                             <label class="position-relative">
                                 <input class="ace" type="checkbox">
                                 <span class="lbl"></span>
                             </label>
-                        </th>
+                        </th> -->
                         <th>操作</th>
                         <!--first_end_no_export-->
-						<th id="th_paper_id" >试卷ID</th>
-						<th id="th_topic_type" >题目类型</th>
-						<th id="th_score" >分值</th>
-						<th id="th_problem_description" >题目描述</th>
-						<th id="th_reference_description" >参考说明</th>
-						<th id="th_option" >选项</th>
-						<th id="th_right_answer" >正确答案</th>
-						<th id="th_create_time" >创建日期</th>
-						<th id="th_update_time" >修改日期</th>
-						<th id="th_imgURL" >图片路径</th>
-						<th id="th_isIMG" >是否为图片类型题目（0：否，1：是）</th>
+						<!-- <th id="th_paper_id" >试卷ID</th> -->
+						<th id="th_topic_type" style="width:5%;" >题目类型</th>
+						<th id="th_score" style="width:5%;">分值</th>
+						<th id="th_problem_description" style="width:20%;">题目描述</th>
+						<th id="th_option" style="width:25%;">选项</th>
+						<th id="th_right_answer" style="width:5%;">正确答案</th>
+						<th id="th_reference_description" style="width:20%;">答案解析</th>
+						<th id="th_create_time" style="width:10%;">创建日期</th>
+						<th id="th_update_time" style="width:10%;">修改日期</th>
+						<!-- <th id="th_imgURL" >图片路径</th>
+						<th id="th_isIMG" >是否为图片类型题目（0：否，1：是）</th> -->
                     </tr>
                     </thead>
                     <!--first_end_export-->
@@ -105,12 +197,12 @@ function deleteTestPaperInfo(){
 					 <#list returnDatas.data as _data>
                             <!--start_no_export-->
                             <tr class="">
-                                <td class="center">
+                               <!--  <td class="center">
                                     <label class="position-relative">
                                         <input name="check_li" value="${_data.id}" class="ace" type="checkbox">
                                         <span class="lbl"></span>
                                     </label>
-                                </td>
+                                </td> -->
                                 <td>
                                     <div class="hidden-sm hidden-xs btn-group">
                                         <button class="btn btn-xs btn-info"
@@ -118,7 +210,7 @@ function deleteTestPaperInfo(){
                                             <i class="ace-icon fa fa-pencil bigger-120"></i>
                                         </button>
                                         <button class="btn btn-xs btn-danger"
-                                                onclick="mydelete('${ctx}/testpaperinfo/delete?id=${(_data.id)!''}','${ctx}/testpaperinfo/list');">
+                                                onclick="mydelete('${ctx}/testpaperinfo/delete?id=${(_data.id)!''}','${ctx}/testpaperinfo/list?paper_id=${(returnDatas.queryBean.paper_id)!'0'}');">
                                             <i class="ace-icon fa fa-trash-o bigger-120"></i>
                                         </button>
                                     </div>
@@ -160,40 +252,35 @@ function deleteTestPaperInfo(){
                                 </td>
                                 <!--end_no_export-->
 
-							<td >
+							<!-- <td >
 								${(_data.paper_id)!0}
-							</td>
+							</td> -->
 							<td >
-								${(_data.topic_type)!0}
+								${(_data.topicTypeName)!''}
 							</td>
 							<td >
 								${(_data.score)!0}
 							</td>
 							<td >
+								${(_data_index+1)!'0'}&nbsp; &nbsp;
 								${(_data.problem_description)!''}
 							</td>
 							<td >
-								${(_data.reference_description)!''}
-							</td>
-							<td >
-								${(_data.option)!''}
+								${(_data.options)!''}
 							</td>
 							<td >
 								${(_data.right_answer)!''}
 							</td>
 							<td >
-								<!--日期型-->
-							${((_data.create_time)?string('yyyy-MM-dd'))!''}
+								${(_data.reference_description)!''}
 							</td>
 							<td >
 								<!--日期型-->
-							${((_data.update_time)?string('yyyy-MM-dd'))!''}
+							${((_data.create_time)?string('yyyy-MM-dd hh:mm:ss'))!''}
 							</td>
 							<td >
-								${(_data.imgURL)!''}
-							</td>
-							<td >
-								${(_data.isIMG)!0}
+								<!--日期型-->
+							${((_data.update_time)?string('yyyy-MM-dd hh:mm:ss'))!''}
 							</td>
 						</tr>
 					</#list>

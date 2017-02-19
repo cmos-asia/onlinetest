@@ -87,6 +87,12 @@ jQuery(document).ready(function(){
 					</select>
 				</div>
 			</div>
+			<script>
+				$(function(){
+					var old_status='${(returnDatas.data.status)!'1'}';
+					$("#status").val(old_status);
+				});
+				</script>
 	        <div class="space-2"></div>
 		</form>
 		<div class="wizard-actions">

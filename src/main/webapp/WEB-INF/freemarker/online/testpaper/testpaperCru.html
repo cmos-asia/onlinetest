@@ -48,18 +48,27 @@ jQuery(document).ready(function(){
 			<div class="form-group">
 				<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="subjects" >科目</label>
 				<div class="col-xs-12 col-sm-9">
-					<div class="clearfix">
-						<input name="subjects" class="col-xs-12 col-sm-6" id="subjects" value="${(returnDatas.data.subjects)!''}"  type="text" />
-					</div><div class="help-block" for="subjects"></div>
+					<div class="clearfix"></div>
+					<select id="subjects" name="subjects" class="col-xs-12 col-sm-6">
+						<#if (returnDatas.data??) && (returnDatas.data.subjectsList??)&&(returnDatas.data.subjectsList?size>0)>
+					 		<#list returnDatas.data.subjectsList as _data>
+					 			<option value="${_data.id!'1'}">${_data.name!''}</option>
+					 		</#list>
+					 	</#if>
+					</select>
 				</div>
+				
+				
 			</div>
 	        <div class="space-2"></div>
 			<div class="form-group">
-				<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="status" >生效状态（0：不可用，1：可以，2：已删除）</label>
+				<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="status" >生效状态</label>
 				<div class="col-xs-12 col-sm-9">
-					<div class="clearfix">
-						<input name="status" class="col-xs-12 col-sm-6" id="status" value="${(returnDatas.data.status)!''}"  type="text" />
-					</div><div class="help-block" for="status"></div>
+					<div class="clearfix"></div>
+					<select id="status" name="status" class="col-xs-12 col-sm-6">
+						<option value="1">生效</option>
+						<option value="0">无效</option>
+					</select>
 				</div>
 			</div>
 	        <div class="space-2"></div>
@@ -91,7 +100,7 @@ jQuery(document).ready(function(){
 			</div>
 	        <div class="space-2"></div>
 					<!--日期型-->
-			<div class="form-group">
+			<!-- <div class="form-group">
 				<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="create_time" >创建日期</label>
 				<div class="col-xs-12 col-sm-9">
 					<div class="clearfix">
@@ -105,9 +114,9 @@ jQuery(document).ready(function(){
 					</div><div class="help-block" for="create_time"></div>
 				</div>
 			</div>
-	        <div class="space-2"></div>
+	        <div class="space-2"></div> -->
 					<!--日期型-->
-			<div class="form-group">
+			<!-- <div class="form-group">
 				<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="update_time" >修改日期</label>
 				<div class="col-xs-12 col-sm-9">
 					<div class="clearfix">
@@ -121,7 +130,7 @@ jQuery(document).ready(function(){
 					</div><div class="help-block" for="update_time"></div>
 				</div>
 			</div>
-	        <div class="space-2"></div>
+	        <div class="space-2"></div> -->
 		</form>
 		<div class="wizard-actions">
 			<button class="btn btn-success btn-info" data-last="Finish" onclick="commonUpdateForm('validation-form','${ctx}/testpaper/list');">
@@ -130,6 +139,20 @@ jQuery(document).ready(function(){
 		</div>
 	</div>
 </div>
+<script>
 
+
+$(function(){
+	
+	// 生效状态
+	var old_status='${(returnDatas.data.status)!'1'}';
+	$("#status").val(old_status);
+	
+	var old_subjects='${(returnDatas.data.subjects)!''}';
+	if(old_subjects){
+		$("#subjects").val(old_subjects);
+	}
+});				
+</script>
 
 </#escape>

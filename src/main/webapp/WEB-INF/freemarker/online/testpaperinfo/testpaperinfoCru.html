@@ -34,23 +34,27 @@ jQuery(document).ready(function(){
 <div class="row">
 	<div class="col-xs-12">
 		<form class="form-horizontal" id="validation-form" method="POST" novalidate="novalidate" action="${ctx}/testpaperinfo/update" > 
-			<input type="hidden" id="id" name="id" value="${(returnDatas.data.id)!''}"/>	
+			<input type="hidden" id="id" name="id" value="${(returnDatas.data.id)!''}"/>
+			<input type="hidden"  name="paper_id" id="paper_id" value="${(returnDatas.data.paper_id)!''}"/>	
+			<input type="hidden"  name="isIMG" id="isIMG" value="${(returnDatas.data.isIMG)!'0'}"/>	
+			<input type="hidden"  name="imgURL" id="imgURL" value="${(returnDatas.data.imgURL)!''}"/>	
 <!--input  hidden  End-->
 			<div class="form-group">
-				<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="paper_id" >试卷ID</label>
-				<div class="col-xs-12 col-sm-9">
-					<div class="clearfix">
-						<input name="paper_id" class="col-xs-12 col-sm-6" id="paper_id" value="${(returnDatas.data.paper_id)!''}"  type="text" />
-					</div><div class="help-block" for="paper_id"></div>
-				</div>
-			</div>
-	        <div class="space-2"></div>
-			<div class="form-group">
 				<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="topic_type" >题目类型</label>
-				<div class="col-xs-12 col-sm-9">
+				<!-- <div class="col-xs-12 col-sm-9">
 					<div class="clearfix">
 						<input name="topic_type" class="col-xs-12 col-sm-6" id="topic_type" value="${(returnDatas.data.topic_type)!''}"  type="text" />
 					</div><div class="help-block" for="topic_type"></div>
+				</div> -->
+				<div class="col-xs-12 col-sm-9">
+					<div class="clearfix"></div>
+					<select id="topic_type" name="topic_type" class="col-xs-12 col-sm-6">
+						<#if (returnDatas.otherData??) &&(returnDatas.otherData?size>0)>
+					 		<#list returnDatas.otherData as _data>
+					 			<option value="${_data.id!'1'}">${_data.name!''}</option>
+					 		</#list>
+					 	</#if>
+					</select>
 				</div>
 			</div>
 	        <div class="space-2"></div>
@@ -58,7 +62,7 @@ jQuery(document).ready(function(){
 				<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="score" >分值</label>
 				<div class="col-xs-12 col-sm-9">
 					<div class="clearfix">
-						<input name="score" class="col-xs-12 col-sm-6" id="score" value="${(returnDatas.data.score)!''}"  type="text" />
+						<input name="score" class="col-xs-12 col-sm-6" id="score" value="${(returnDatas.data.score)!'1'}"  type="text" />
 					</div><div class="help-block" for="score"></div>
 				</div>
 			</div>
@@ -73,20 +77,12 @@ jQuery(document).ready(function(){
 			</div>
 	        <div class="space-2"></div>
 			<div class="form-group">
-				<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="reference_description" >参考说明</label>
+				<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="options" >选项</label>
 				<div class="col-xs-12 col-sm-9">
 					<div class="clearfix">
-						<input name="reference_description" class="col-xs-12 col-sm-6" id="reference_description" value="${(returnDatas.data.reference_description)!''}"  type="text" />
-					</div><div class="help-block" for="reference_description"></div>
-				</div>
-			</div>
-	        <div class="space-2"></div>
-			<div class="form-group">
-				<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="option" >选项</label>
-				<div class="col-xs-12 col-sm-9">
-					<div class="clearfix">
-						<input name="option" class="col-xs-12 col-sm-6" id="option" value="${(returnDatas.data.option)!''}"  type="text" />
-					</div><div class="help-block" for="option"></div>
+						<!-- <input name="options" class="col-xs-12 col-sm-6" style="" id="options" value="${(returnDatas.data.options)!''}"  type="text" /> -->
+						<textarea rows="4" cols="" class="col-xs-12 col-sm-6" id="options" name="options">${(returnDatas.data.options)!''}</textarea>
+					</div><div class="help-block" for="options"></div>
 				</div>
 			</div>
 	        <div class="space-2"></div>
@@ -98,9 +94,18 @@ jQuery(document).ready(function(){
 					</div><div class="help-block" for="right_answer"></div>
 				</div>
 			</div>
+			<div class="space-2"></div>
+			<div class="form-group">
+				<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="reference_description" >答案解析</label>
+				<div class="col-xs-12 col-sm-9">
+					<div class="clearfix">
+						<input name="reference_description" class="col-xs-12 col-sm-6" id="reference_description" value="${(returnDatas.data.reference_description)!''}"  type="text" />
+					</div><div class="help-block" for="reference_description"></div>
+				</div>
+			</div>
 	        <div class="space-2"></div>
 					<!--日期型-->
-			<div class="form-group">
+			<!-- <div class="form-group">
 				<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="create_time" >创建日期</label>
 				<div class="col-xs-12 col-sm-9">
 					<div class="clearfix">
@@ -114,9 +119,9 @@ jQuery(document).ready(function(){
 					</div><div class="help-block" for="create_time"></div>
 				</div>
 			</div>
-	        <div class="space-2"></div>
+	        <div class="space-2"></div> -->
 					<!--日期型-->
-			<div class="form-group">
+			<!-- <div class="form-group">
 				<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="update_time" >修改日期</label>
 				<div class="col-xs-12 col-sm-9">
 					<div class="clearfix">
@@ -130,8 +135,8 @@ jQuery(document).ready(function(){
 					</div><div class="help-block" for="update_time"></div>
 				</div>
 			</div>
-	        <div class="space-2"></div>
-			<div class="form-group">
+	        <div class="space-2"></div> -->
+			<!-- <div class="form-group">
 				<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="imgURL" >图片路径</label>
 				<div class="col-xs-12 col-sm-9">
 					<div class="clearfix">
@@ -139,8 +144,8 @@ jQuery(document).ready(function(){
 					</div><div class="help-block" for="imgURL"></div>
 				</div>
 			</div>
-	        <div class="space-2"></div>
-			<div class="form-group">
+	        <div class="space-2"></div> -->
+			<!-- <div class="form-group">
 				<label class="control-label col-xs-12 col-sm-3 no-padding-right" for="isIMG" >是否为图片类型题目（0：否，1：是）</label>
 				<div class="col-xs-12 col-sm-9">
 					<div class="clearfix">
@@ -148,10 +153,10 @@ jQuery(document).ready(function(){
 					</div><div class="help-block" for="isIMG"></div>
 				</div>
 			</div>
-	        <div class="space-2"></div>
+	        <div class="space-2"></div> -->
 		</form>
 		<div class="wizard-actions">
-			<button class="btn btn-success btn-info" data-last="Finish" onclick="commonUpdateForm('validation-form','${ctx}/testpaperinfo/list');">
+			<button class="btn btn-success btn-info" data-last="Finish" onclick="commonUpdateForm('validation-form','${ctx}/testpaperinfo/list?paper_id=${(returnDatas.data.paper_id)!''}');">
 				保存
 			</button>
 		</div>

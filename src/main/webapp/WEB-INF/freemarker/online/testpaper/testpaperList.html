@@ -1,8 +1,13 @@
 <#escape x as x?html>
 
-<script type="text/javascript" src="${ctx}/js/online/testpaper/testpaper.js"></script>
+<!-- <script type="text/javascript" src="${ctx}/js/online/testpaper/testpaper.js"></script> -->
 
 <script type="text/javascript">
+$(document).ready(function(){
+	
+	// 查询栏：筛选条件选择
+    $("#search_status").val('${(returnDatas.queryBean.status)!''}');
+});
 
 function deleteTestPaper(){
 	var id=jQuery("#id").val();
@@ -31,10 +36,11 @@ function deleteTestPaper(){
             <input type="hidden" name="pageIndex" id="pageIndex" value="${(returnDatas.page.pageIndex)!'1'}"/>
             <input type="hidden" name="sort" id="page_sort" value="${(returnDatas.page.sort)!'desc'}"/>
             <input type="hidden" name="order" id="page_order" value="${(returnDatas.page.order)!'id'}"/>
-			<label for="search_state"><b>是否可用:</b></label> 
-			 <select id="search_state" name="state" class="col-10" >
-				<option value="是">是</option>
-				<option value="否">否</option>
+			<label for="search_status"><b>生效状态:</b></label> 
+			 <select id="search_status" name="status" class="col-10" >
+				<option value="">全部</option>
+				<option value="1">生效</option>
+				<option value="0">无效</option>
 			</select>
 			<a  href="javascript:mySubmitForm('searchForm');"
 				class="btn btn-purple btn-sm">
@@ -85,12 +91,12 @@ function deleteTestPaper(){
                         <!--first_end_no_export-->
 						<th id="th_name" >试卷名称</th>
 						<th id="th_subjects" >科目</th>
-						<th id="th_status" >生效状态（0：不可用，1：可以，2：已删除）</th>
+						<th id="th_status" >生效状态</th>
 						<th id="th_answer_time" >作答时间</th>
 						<th id="th_total_score" >总分</th>
 						<th id="th_pass_mark" >及格分数</th>
 						<th id="th_create_time" >创建日期</th>
-						<th id="th_update_time" >修改日期</th>
+						<th id="th_update_time" >更新日期</th>
                     </tr>
                     </thead>
                     <!--first_end_export-->
@@ -110,13 +116,17 @@ function deleteTestPaper(){
                                 </td>
                                 <td>
                                     <div class="hidden-sm hidden-xs btn-group">
+                                    	<button class="btn btn-xs btn-info"
+                                                onclick="myhref('${ctx}/testpaperinfo/list?paper_id=${(_data.id)!''}');">
+                                            <i class="ace-icon fa fa-pencil bigger-120">试题管理</i>
+                                        </button>
                                         <button class="btn btn-xs btn-info"
                                                 onclick="myhref('${ctx}/testpaper/update/pre?id=${(_data.id)!''}');">
-                                            <i class="ace-icon fa fa-pencil bigger-120"></i>
+                                            <i class="ace-icon fa fa-pencil bigger-120">修改</i>
                                         </button>
                                         <button class="btn btn-xs btn-danger"
                                                 onclick="mydelete('${ctx}/testpaper/delete?id=${(_data.id)!''}','${ctx}/testpaper/list');">
-                                            <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                                            <i class="ace-icon fa fa-trash-o bigger-120">删除</i>
                                         </button>
                                     </div>
                                     <div class="hidden-md hidden-lg">
@@ -161,10 +171,17 @@ function deleteTestPaper(){
 								${(_data.name)!''}
 							</td>
 							<td >
-								${(_data.subjects)!0}
+								<!-- ${(_data.subjects)!0} -->
+								${(_data.subjectsName)!''}
 							</td>
 							<td >
-								${(_data.status)!0}
+								<#if (_data.status??)&&(_data.status=1)>
+									<font color="green">有效</font>
+								<#elseif (_data.status??)&&(_data.status=0)>
+									<font color="red">无效</font>
+								<#else>
+									未知
+								</#if>
 							</td>
 							<td >
 								${(_data.answer_time)!0}
@@ -177,11 +194,11 @@ function deleteTestPaper(){
 							</td>
 							<td >
 								<!--日期型-->
-							${((_data.create_time)?string('yyyy-MM-dd'))!''}
+							${((_data.create_time)?string('yyyy-MM-dd hh:mm:ss'))!''}
 							</td>
 							<td >
 								<!--日期型-->
-							${((_data.update_time)?string('yyyy-MM-dd'))!''}
+							${((_data.update_time)?string('yyyy-MM-dd hh:mm:ss'))!''}
 							</td>
 						</tr>
 					</#list>
