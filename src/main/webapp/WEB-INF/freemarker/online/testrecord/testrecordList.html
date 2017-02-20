@@ -1,9 +1,15 @@
 <#escape x as x?html>
 
-<script type="text/javascript" src="${ctx}/js/online/testrecord/testrecord.js"></script>
+<!-- <script type="text/javascript" src="${ctx}/js/online/testrecord/testrecord.js"></script> -->
 
 <script type="text/javascript">
 
+$(document).ready(function(){
+	
+	// 查询栏：筛选条件选择
+    $("#search_isPass").val('${(returnDatas.queryBean.isPass)!''}');
+    $("#search_status").val('${(returnDatas.queryBean.status)!''}');
+});
 function deleteTestRecord(){
 	var id=jQuery("#id").val();
 	if(!id||id==""){
@@ -31,10 +37,17 @@ function deleteTestRecord(){
             <input type="hidden" name="pageIndex" id="pageIndex" value="${(returnDatas.page.pageIndex)!'1'}"/>
             <input type="hidden" name="sort" id="page_sort" value="${(returnDatas.page.sort)!'desc'}"/>
             <input type="hidden" name="order" id="page_order" value="${(returnDatas.page.order)!'id'}"/>
-			<label for="search_state"><b>是否可用:</b></label> 
-			 <select id="search_state" name="state" class="col-10" >
-				<option value="是">是</option>
-				<option value="否">否</option>
+			<label for="search_isPass"><b>是否及格:</b></label> 
+			 <select id="search_isPass" name="isPass" class="col-10" >
+			 	<option value="">全部</option>
+				<option value="1">是</option>
+				<option value="0">否</option>
+			</select>
+			<label for="search_status"><b>是否完成:</b></label> 
+			 <select id="search_status" name="status" class="col-10" >
+			 	<option value="">全部</option>
+				<option value="1">是</option>
+				<option value="0">否</option>
 			</select>
 			<a  href="javascript:mySubmitForm('searchForm');"
 				class="btn btn-purple btn-sm">
@@ -83,17 +96,16 @@ function deleteTestRecord(){
                         </th>
                         <th>操作</th>
                         <!--first_end_no_export-->
-						<th id="th_student_id" >学生ID</th>
-						<th id="th_paper_id" >试题表ID</th>
+						<th id="th_student_id" >学生</th>
+						<th id="th_paper_id" >试题</th>
 						<th id="th_paper_name" >试题名称</th>
-						<th id="th_used_time" >做题使用时间</th>
+						<th id="th_used_time" >用时</th>
+						<th id="th_total_score" >总分</th>
 						<th id="th_right_score" >得分</th>
 						<th id="th_answer_start_time" >作答开始时间</th>
 						<th id="th_answer_finish_time" >作答结束时间</th>
-						<th id="th_create_time" >创建日期</th>
-						<th id="th_update_time" >修改日期</th>
-						<th id="th_status" >状态（0：未做 1：已做）</th>
-						<th id="th_isPass" >是否及格（0：否，1：是）</th>
+						<th id="th_status" >状态</th>
+						<th id="th_isPass" >是否及格</th>
                     </tr>
                     </thead>
                     <!--first_end_export-->
@@ -115,47 +127,16 @@ function deleteTestRecord(){
                                     <div class="hidden-sm hidden-xs btn-group">
                                         <button class="btn btn-xs btn-info"
                                                 onclick="myhref('${ctx}/testrecord/update/pre?id=${(_data.id)!''}');">
+                                            <i class="ace-icon fa fa-pencil bigger-120">答题详情</i>
+                                        </button>
+                                        <!-- <button class="btn btn-xs btn-info"
+                                                onclick="myhref('${ctx}/testrecord/update/pre?id=${(_data.id)!''}');">
                                             <i class="ace-icon fa fa-pencil bigger-120"></i>
                                         </button>
                                         <button class="btn btn-xs btn-danger"
                                                 onclick="mydelete('${ctx}/testrecord/delete?id=${(_data.id)!''}','${ctx}/testrecord/list');">
                                             <i class="ace-icon fa fa-trash-o bigger-120"></i>
-                                        </button>
-                                    </div>
-                                    <div class="hidden-md hidden-lg">
-                                        <div class="inline position-relative">
-                                            <button class="btn btn-minier btn-primary dropdown-toggle"
-                                                    data-toggle="dropdown" data-position="auto">
-                                                <i class="ace-icon fa fa-cog icon-only bigger-110"></i>
-                                            </button>
-                                            <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
-	                                          <li>
-													<a  href="javascript:myhref('${ctx}/testrecord/look?id=${(_data.id)!''}');"  class="tooltip-info" data-rel="tooltip" title="View">
-														<span class="blue">
-															<i class="ace-icon fa fa-search-plus bigger-120"></i>
-														</span>
-													</a>
-											  </li>	
-                                                <li>
-                                                    <a data-original-title="Edit"
-                                                       href="javascript:myhref('${ctx}/testrecord/update/pre?id=${(_data.id)!''}');"
-                                                       class="tooltip-success" data-rel="tooltip" title="">
-																		<span class="green">
-																			<i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
-																		</span>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a data-original-title="Delete"
-                                                       href="javascript:mydelete('${ctx}/testrecord/delete?id=${(_data.id)!''}','${ctx}/testrecord/list');"
-                                                       class="tooltip-error" data-rel="tooltip" title="">
-																		<span class="red">
-																			<i class="ace-icon fa fa-trash-o bigger-120"></i>
-																		</span>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
+                                        </button> -->
                                     </div>
                                 </td>
                                 <!--end_no_export-->
@@ -173,29 +154,36 @@ function deleteTestRecord(){
 								${(_data.used_time)!0}
 							</td>
 							<td >
+								${(_data.total_score)!0}
+							</td>
+							<td >
 								${(_data.right_score)!0}
 							</td>
 							<td >
 								<!--日期型-->
-							${((_data.answer_start_time)?string('yyyy-MM-dd'))!''}
+							${((_data.answer_start_time)?string('yyyy-MM-dd hh:mm:ss'))!''}
 							</td>
 							<td >
 								<!--日期型-->
-							${((_data.answer_finish_time)?string('yyyy-MM-dd'))!''}
+							${((_data.answer_finish_time)?string('yyyy-MM-dd hh:mm:ss'))!''}
 							</td>
 							<td >
-								<!--日期型-->
-							${((_data.create_time)?string('yyyy-MM-dd'))!''}
+								<#if (_data.status??)&&(_data.status=1)>
+									<font color="green">已完成</font>
+								<#elseif (_data.status??)&&(_data.status=0)>
+									<font color="red">未完成</font>
+								<#else>
+									未知
+								</#if>
 							</td>
 							<td >
-								<!--日期型-->
-							${((_data.update_time)?string('yyyy-MM-dd'))!''}
-							</td>
-							<td >
-								${(_data.status)!0}
-							</td>
-							<td >
-								${(_data.isPass)!0}
+								<#if (_data.isPass??)&&(_data.isPass=1)>
+									<font color="green">是</font>
+								<#elseif (_data.isPass??)&&(_data.isPass=0)>
+									<font color="red">否</font>
+								<#else>
+									未知
+								</#if>
 							</td>
 						</tr>
 					</#list>
