@@ -1,34 +1,16 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta name="viewport" content="width=device-width" />
-		<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
-		<meta charset="utf-8" />
-		<title>在线测试中心</title>
-		<link href="./assets/nav.css" rel="stylesheet" type="text/css" />
+<#escape x as x?html>
+<#import "/online/front/head.html" as cmMacro />
+<@cmMacro.head />
+		<link href="../css/front/assets/nav.css" rel="stylesheet" type="text/css" />
 		<style>
 		#headerbox {
 		position: relative;
 		}
 		</style>
-		<link rel="stylesheet" href="./assets/index.css">
+		<link rel="stylesheet" href="../css/front/assets/index.css">
 	</head>
 	<body>
-		<div id="top-wrap">
-			<div class="top-nav-wrap" id="headerbox">
-				<div class="tn-header">
-					<div class="tn-nav">
-						
-					</div>
-					<div class="tn-person-r">
-						<!-- nologin -->
-						<div class="tn-title" id="nologinbox"><a href="./login.html"  target="_self" class="tn-tab"><em class="denglu"></em>登录</a><b>|</b><a href="./register.html" onClick="return ghead.register();" target="_self" class="tn-tab ui-denglu">注册</a>
-					</div>
-					<!-- end -->
-				</div>
-			</div>
-		</div>
-	</div>
+	<@cmMacro.online_tab />
 	
 	<div class="main_content clearfix">
 		<div class="main_content clearfix">
@@ -77,6 +59,7 @@
 			</div>
 		</div>
 	</div>
-	<script src="./common/footer.js"></script>
+	<@cmMacro.footer />
 </body>
 </html>
+</#escape>

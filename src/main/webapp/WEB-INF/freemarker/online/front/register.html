@@ -1,0 +1,156 @@
+<#escape x as x?html>
+<#import "/online/front/head.html" as cmMacro />
+<@cmMacro.head />
+    <link rel="stylesheet" type="text/css" href="../css/front/assets/login.css" />
+    <style>
+.input_radio{
+	width:24px;
+	height:48px;
+	border: 1px solid #e0e0e0;
+	padding-left: 15px;
+	display: inline;
+	float: left; 
+	margin-right:20px;
+}
+
+.input_radio_span{
+	width:24px;
+	height:48px;
+	text-align: justify;
+	display: inline;
+	float: left; 
+	margin-right:20px;
+    line-height: 50px;
+    display: block;
+}
+</style>
+  </head>
+  <body>
+    <div class="nav-box">
+      <div class="nav-box-big">
+        <div class="logo fl"><a class="logoPic" href="javascript:void(0)" title="在线测试">&nbsp;</a><i> </i><span> 注册</span></div>
+        <div class="nav-r fr">
+          <em>已有账号？</em> <a href="${ctx}/front/login" class="text_zc">马上登录</a>
+        </div>
+      </div>
+    </div>
+    
+    <style type="text/css">
+    body {background: url(../css/front/img/bg.png) center 40px #fff no-repeat !important;}
+    .gg-big-img { width: 1000px;height: 80px;margin: 20px auto -30px;}
+    .main{margin: 90px auto 0}
+    </style>
+    <div class="main mainBg">
+      
+      <div class="f-fl regWays ">
+        <ul>
+          <li class="z-on">
+            <a href="/register">
+              <i class="icon sj"></i>
+              <h3>
+              <i class="icon phone"></i>手机账号
+              </h3>
+              <p>方便好记，安全可靠</p>
+            </a>
+          </li>
+          
+        </ul>
+      </div>
+      <div class="fr regForm">
+        <input id="captchaType" type="hidden" value="0" />
+        <form action="javascript:void(0)" id="mobileRegisterForm">
+          <div class="frame">
+            <div class="frameInput">
+              <label>手机号：</label>
+              <input class="frameInput_text" name="phone" id="phone" autocomplete="off" type="tel" maxlength="11"  placeholder="请输入您常用的手机号码" />
+              <div class="frameInfo msg-box"></div>
+            </div>
+          </div>
+          <div class="frame">
+            <div class="frameInput">
+              <label>姓名：</label>
+              <input class="frameInput_text" name="name" id="name" autocomplete="off" type="text" placeholder="请输入您的姓名" />
+              <div class="frameInfo msg-box"></div>
+            </div>
+          </div>
+          <div class="frame">
+            <div class="frameInput">
+              <label>专业：</label>
+              <input class="frameInput_text" name="major" id="major" autocomplete="off" type="text" placeholder="请输入您的专业" />
+              <div class="frameInfo msg-box"></div>
+            </div>
+          </div>
+          <div class="frame">
+            <div class="frameInput">
+              <label>性别：</label>
+              <input name="sex" class="input_radio" autocomplete="off" type="radio" value="男" checked />
+              <span class="input_radio_span">男</span>
+              <input name="sex" class="input_radio"  autocomplete="off" type="radio" value="女"/>
+              <span class="input_radio_span">女</span>
+              <div class="frameInfo msg-box"></div>
+            </div>
+          </div>
+          <div class="frame">
+            <div class="frameInput">
+              <label>密码：</label>
+              <input type="text" style="display: none;">
+              <input class="frameInput_text" name="password" id="password" autocomplete="off" type="password" placeholder="长度为6-20个字符" />
+              <a href="javascript:void(0)" class="eyesClose"></a>
+              <div class="frameInfo msg-box"></div>
+            </div>
+          </div>
+          <div class="frame">
+            <div class="frameInput">
+              <label>验证码：</label>
+              <input class="frameInput_text w140" name="captcha" id="captcha" type="text" autocomplete="off" />
+              <span class="code_img">
+              <img  class="img-captcha" id="captchaImg" src="${ctx}/getCaptcha" onclick="reloadValidateCode();" style="width:100%;height:100%;"/></span>
+              <span class="change_code" onclick="reloadValidateCode();">看不清？换一张</span>
+              <div class="frameInfo msg-box"></div>
+            </div>
+          </div>
+          <div class="frame">
+            <div class="frameInput">
+              <p class="agreen">
+                <i class="checked"></i>我已阅读并同意<a href="#" target="_blank">《在线测试协议》</a>
+              </p>
+            </div>
+          </div>
+          
+          <div class="frame">
+            <input class="submit" name="" type="submit" onclick="registerSubmit();" value="立即注册" />
+          </div>
+        </form>
+      </div>
+    </div>
+    <script>
+    function reloadValidateCode() {
+        document.getElementById("captchaImg").src="${ctx}/getCaptcha?date =" + new Date().getTime();
+        //$("#captchaImg").attr("src","${ctx}/getCaptcha?date = " + new Date() + Math.floor(Math.random()*24));
+    }
+    
+    function registerSubmit(){
+    	$.ajax({
+            type: "POST",
+            url:"${ctx}/front/student/register",
+            data:$('#mobileRegisterForm').serialize(),// 你的formid
+            async: false,
+            success: function(_json) {
+            	if(_json.status=="success"){
+            		alert("注册成功");
+				}else if(_json.status=='warning'){
+				    // 验证码错误，需重新刷新，避免破解
+					alert(_json.message);
+				    $("#captcha").val('');
+					document.getElementById("captchaImg").src="${ctx}/getCaptcha?date =" + new Date().getTime();
+				}else{
+					alert(_json.message);
+				}
+            }
+        });
+    }
+    </script>
+    <@cmMacro.footer />
+  </body>
+</html>
+</#escape>

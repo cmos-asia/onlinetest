@@ -1,0 +1,107 @@
+<#escape x as x?html>
+<#import "/online/front/head.html" as cmMacro />
+<@cmMacro.head />
+		<title>
+		学员登录
+		</title>
+		<link rel="stylesheet" type="text/css" href="../css/front/assets/login.css" />
+		<style type="text/css">
+		.logoPic {
+		background: url(../css/front/img/toplogo.png) no-repeat;
+		width: 310px;
+		height: 60px;
+		}
+		</style>
+	</head>
+	<body style="background: url(../css/front/img/dl_bg.jpg) center 0 no-repeat !important;">
+		<div class="nav-box">
+			<div class="nav-box-big w940">
+				<div class="logo fl">
+					<a class="logoPic" href="javascript:void(0)" >学习中心</a>
+				</div>
+				<div class="nav-r fr">
+					<a href="${ctx}/front/index">首页</a> | <a href="${ctx}/front/register" class="">快速注册</a>
+				</div>
+			</div>
+		</div>
+		
+		<div class="main w875 f-pt45">
+			<div class="fl inputFrame">
+				<div class="Frame_tit nav_login">
+					<a href="javascript:void(0)" class="z_on">用户登录</a>
+				</div>
+				<form action="javascript:void(0)" id="loginfrom">
+					<ul class="inputFrame_info clearfix">
+						<li>
+							<div class="cline">
+								<label class="inptIcons zh"></label>
+								<input type="text" id="phone" name="phone" class="txt" placeholder="请输入手机号 ">
+							</div>
+							<div class="warn__account warn" style="display: none;">
+								<span class="flase">&nbsp;</span><span class="ztag"></span>
+							</div>
+						</li>
+						<li>
+							<div class="cline">
+								<label class="inptIcons mm"></label>
+								<input type="password" id="password" name="password" class="txt" placeholder="请输入密码">
+								<a href="javascript:void(0);" class="eyesOpen" style="display: none"></a><a href="javascript:void(0);" class="eyesClose"></a>
+							</div>
+							<div class="warn__password warn" style="display: none;">
+								<span class="flase">&nbsp;</span><span class="ztag"></span>
+							</div>
+						</li>
+						
+						<li class="w1">
+							<span class="chkbox fl">
+								<input name="remember" type="checkbox" checked="checked" class="checkbox remember">
+								下次自动登录
+								</span><span class="fr"> <a href="javascript:void(0)" class="btn__register redTxt" data-url="#">快速注册</a> | <a href="javascript:void(0)" class="btn__forget fgt" data-url="#"> 忘记密码？</a></span>
+							</li>
+							<li>
+								<input id="normalSubmit" onclick="myLogin();" type="submit" value="登    录" class="inputFrame_btn" />
+								<div class="warn__submit1 warn" style="display: none;">
+									<span class="flase">&nbsp;</span><span class="ztag"></span>
+								</div>
+							</li>
+						</ul>
+					</form>
+				</div>
+				<div class="fr loginOthers">
+					<ul>
+						<li>
+							<h3>免注册，快速登录</h3>
+						</li>
+						<li><a href="javascript:void(0);" class="weibo"><i></i>使用微博账号登录</a></li>
+						<li><a href="javascript:void(0);" class="qq"><i></i>使用QQ账号登录</a></li>
+						<li><a href="javascript:void(0);" class="weChat"><i></i>使用微信登录</a></li>
+					</ul>
+				</div>
+			</div>
+			<@cmMacro.footer />
+		</body>
+		
+		<script type="text/javascript">
+		function myLogin(){
+			
+			$.ajax({
+	            type: "POST",
+	            url:"${ctx}/front/student/login",
+	            data:$('#loginfrom').serialize(),// 你的formid
+	            async: false,
+	            success: function(_json) {
+	            	if(_json.status=="success"){
+	            		var r=confirm("登录成功")
+	            		if (r==true) {
+    						window.location.href="${ctx}/front/index";
+    					}
+					}else{
+						alert(_json.message);
+					}
+	            }
+	        });
+		}
+		</script>
+		
+	</html>
+	</#escape>
