@@ -33,4 +33,31 @@ public class Enumerations {
 		}
 	}
 
+	// 考试状态
+	public enum TestStatus {
+		未做(0), 已做(1), 已删除(2);
+		int status;
+
+		private TestStatus(int status) {
+			this.status = status;
+		}
+
+		public int getTestStatus() {
+			return status;
+		}
+
+		public static TestStatus getTestStatus(int status) {
+			switch (status) {
+			case 0:
+				return 未做;
+			case 1:
+				return 已做;
+			case 2:
+				return 已删除;
+			default:
+				return 未做;
+			}
+		}
+	}
+
 }

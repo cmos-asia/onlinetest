@@ -1,0 +1,96 @@
+<#escape x as x?html>
+<#import "/online/front/head.html" as cmMacro />
+<@cmMacro.head />
+        <title>在线测试中心</title>
+        <link href="../css/front/assets/nav.css" rel="stylesheet" type="text/css" />
+        <style>
+        #headerbox {
+        position: relative;
+        }
+        </style>
+        <link rel="stylesheet" href="../css/front/assets/index.css">
+        <link rel="stylesheet" href="../css/front/assets/list.css">
+    </head>
+    <body>
+        <@cmMacro.online_tab />
+    
+    <div class="main_content clearfix">
+        <div class="main_content clearfix">
+            <div class="le-prabg test-classificon-t clearfix clear">
+                <div class="navleft clearfix">
+                    <div class="tk-box clearfix">
+						<dl>
+							<dd class=""><a href="${ctx}/front/index"><i class="home"></i>首页</a></dd>
+						</dl>
+						<dl>
+							<dt>我的题库</dt>
+							<dd class="this"><a href="${ctx}/front/index"><i class="myexam"></i>开始做题</a></dd>
+							<dd class=""><a href="${ctx}/front/myrecord"><i class="record"></i>我的记录</a></dd>
+						</dl>
+						<dl>
+							<dt>个人管理</dt>
+							<dd class=""><a href="${ctx}/front/userInfo"><i class="myaccount"></i>账户安全</a></dd>
+						</dl>
+					</div>
+                </div>
+                <!--右侧中间部分-->
+                <div class="test-clawidth-more bor" id="class_frame">
+                    <div class="pracl-dalist bor">
+                        <div class="paper-tit">
+                            <a href="javascript:void(0)">默认</a>
+                        </div>
+                        
+                        <#if (returnDatas.otherData??) && (returnDatas.otherData?size>0)>
+								<#list returnDatas.otherData as _data>
+						<ul>
+                            <li>
+                                <span class="dal-but">
+                                    <a target="_blank" href="#" class="downPage"> 下载试卷 </a>
+                                    <a target="_parent" href="${ctx}/front/testPaper?id=${(_data.id)!'0'}" class="zt-go"> 开始做题 </a>
+                                </span> <i class="ico moni"></i>
+                                <div class="">
+                                    <h3>
+                                    	<a target="_parent" href="#">
+                                    		${(_data.name)!''}                                
+                                    	</a>
+                                    </h3>
+                                    <p> 
+                                    	<!-- <span>1114人参考</span> 
+                                    	<span>
+                                    		<em>质量</em>
+                                    		<i class="vso-star">
+                                    			<b style=" width:60%;"></b>
+                                    		</i> 
+                                    	</span> --> 
+                                    </p>
+                                </div>
+                            </li>
+                        </ul>
+								</#list>
+								<#else>
+								<ul>
+                            <li>
+                           	 当前科目无可用试卷
+                            </li>
+                        </ul>
+								
+							</#if>
+                        <!--分页 {classId:int}-{paperType}-{area}-{year}-{page}-->
+                        <!-- <div class="ui-page" data-invalidpageerrmsg="Page index is invalid" data-outrangeerrmsg="Page index is out of range" data-pagecount="10" data-pageparameter="page" data-pagerid="Webdiyer.MvcPager" id="pageBar">
+                            <a class="ui-page-turn">上一页</a>
+                            <a class="z-on">1</a>
+                            <a href="javascript:void(0)">2</a>
+                            <a href="javascript:void(0)">3</a>
+                            <a href="javascript:void(0)">...</a>
+                            <a href="javascript:void(0)">10</a>
+                            <span class="ui-page-turn"><a href="javascript:void(0)">下一页</a></span>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	<@cmMacro.footer />
+</body>
+</html>
+</#escape>

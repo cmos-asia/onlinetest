@@ -4,7 +4,12 @@
 		<link href="../css/front/assets/nav.css" rel="stylesheet" type="text/css" />
 		<style>
 		#headerbox {
-		position: relative;
+			position: relative;
+		}
+		
+		.current{
+    		background-color: #f04800;
+    		color: #FFF;
 		}
 		</style>
 		<link rel="stylesheet" href="../css/front/assets/index.css">
@@ -18,11 +23,16 @@
 				<div class="navleft clearfix">
 					<div class="tk-box clearfix">
 						<dl>
-							<dd class=""><a href="javascript:void(0)"><i class="home"></i>首页</a></dd>
+							<dd class=""><a href="${ctx}/front/index"><i class="home"></i>首页</a></dd>
 						</dl>
 						<dl>
 							<dt>我的题库</dt>
-							<dd class=""><a href="javascript:void(0)"><i class="myexam"></i>开始做题</a></dd>
+							<dd class="this"><a href="${ctx}/front/index"><i class="myexam"></i>开始做题</a></dd>
+							<dd class=""><a href="${ctx}/front/recordList"><i class="record"></i>我的记录</a></dd>
+						</dl>
+						<dl>
+							<dt>个人管理</dt>
+							<dd class=""><a href="${ctx}/front/userInfo"><i class="myaccount"></i>账户安全</a></dd>
 						</dl>
 					</div>
 				</div>
@@ -30,30 +40,13 @@
 				<div class="test-clawidth-more bor" id="class_frame">
 					<div class="clawidth-maincon clearfix">
 						<dl class="hot">
-							<dt><i> 热门考试</i></dt>
-							<dd> <a href="javascript:void(0)" class="" data-name="cy" title="会计从业">会计从业</a> </dd>
-							<dd> <a href="#" class=""  data-name="jzs2" title="二级建造师">二级建造师</a> </dd>
-							<dd> <a href="#" class=""  data-name="teacher" title="教师资格">教师资格</a> </dd>
-							<dd> <a href="#" class=""  data-name="jzs1" title="一级建造师">一级建造师</a> </dd>
-							<dd> <a href="#" class="" ate-wxclassid="369" data-name="zq" title="证券从业">证券从业</a> </dd>
-							<dd> <a href="#" class=""  data-name="ccbp" title="银行从业">银行从业</a> </dd>
-							<dd> <a href="#" class=""  data-name="qh" title="期货从业">期货从业</a> </dd>
-							<dd> <a href="#" class=""  data-name="jjs" title="经济师">经济师</a> </dd>
-							<dd> <a href="#" class=""  data-name="cet4" title="英语四级">英语四级</a> </dd>
+							<dt><i> 科目分类</i></dt>
+							<#if (returnDatas.otherData??) && (returnDatas.otherData?size>0)>
+								<#list returnDatas.otherData as _data>
+									<dd> <a href="${ctx}/front/testPaperList?subjects=${(_data.id)!'1'}" class="" data-name="cy" title="">${(_data.name)}</a> </dd>
+								</#list>
+							</#if>
 						</dl>
-						<dl class="jianzhu">
-							<dt><i> 热门考试</i></dt>
-							<dd> <a href="#" class="" data-name="cy" title="会计从业">会计从业</a> </dd>
-							<dd> <a href="#" class=""  data-name="jzs2" title="二级建造师">二级建造师</a> </dd>
-							<dd> <a href="#" class=""  data-name="teacher" title="教师资格">教师资格</a> </dd>
-							<dd> <a href="#" class=""  data-name="jzs1" title="一级建造师">一级建造师</a> </dd>
-							<dd> <a href="#" class="" ate-wxclassid="369" data-name="zq" title="证券从业">证券从业</a> </dd>
-							<dd> <a href="#" class=""  data-name="ccbp" title="银行从业">银行从业</a> </dd>
-							<dd> <a href="#" class=""  data-name="qh" title="期货从业">期货从业</a> </dd>
-							<dd> <a href="#" class=""  data-name="jjs" title="经济师">经济师</a> </dd>
-							<dd> <a href="#" class=""  data-name="cet4" title="英语四级">英语四级</a> </dd>
-						</dl>
-						
 					</div>
 				</div>
 			</div>

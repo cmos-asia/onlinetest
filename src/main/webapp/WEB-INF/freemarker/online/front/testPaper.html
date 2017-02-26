@@ -1,0 +1,156 @@
+<#escape x as x?html>
+<#import "/online/front/head.html" as cmMacro />
+<@cmMacro.head />
+        <title>在线考试</title>
+        <link href="../css/front/assets/question.css" rel="stylesheet" />
+        <link href="../css/front/assets/nav.css" rel="stylesheet" type="text/css" />
+        <style>
+        #headerbox {
+        position: relative;
+        }
+        #questionModule {
+        width: 100%;
+        min-height: 300px;
+        background: none;
+        overflow: hidden;
+        position: relative;
+        }
+        #questionModule > ul {
+        width: 100%;
+        height: auto;
+        }
+        #questionModule.cross-range {
+        margin-bottom: 20px;
+        }
+        #questionModule.cross-range > ul {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        }
+        #questionModule.cross-range > ul > li {
+        float: left;
+        width: 100%;
+        overflow: hidden;
+        }
+        .st_radio{
+            position: absolute;left: 9px;top:12px;
+        }
+        </style>
+        <link rel="stylesheet" href="../css/front/assets/index.css">
+    </head>
+    <body>
+        <@cmMacro.online_tab />
+    
+    <#if (returnDatas.otherData??)>
+    <form id="testPaperForm" name="testPaperForm" onsubmit="return false">
+    <div class="pracontent clearfix" style="margin-top: 20px">
+        <div class="m-examHead bor ">
+            <!--试卷头信息-->
+            <h2 class="h2"> 
+				${(returnDatas.otherData.name)!''}
+				<input name="paper_id" value="${(returnDatas.otherData.id)!''}" type="hidden"/>
+            </h2>
+            <div class="info">
+                <p>◇ 本卷科目类型为&nbsp;${(returnDatas.otherData.subjectsName)!''}，作答时间为${(returnDatas.otherData.answer_time)!''}分钟，总分：${(returnDatas.otherData.total_score)!''}分
+                </p>
+            </div>
+        </div>
+        <div class="dopra-con clearfix">
+            <div class="pra-left-con">
+                <!-- 练习模式做题-->
+                
+                <div id="questionModule" class="">
+                    <div class="m__ruleTitle" >
+                        <div class="m-secpart"> 选择题</div>
+                    </div>
+                    <ul class="m__ruleQuest" data-ruleid="1756095" data-loadstate="notget">
+                        <li>
+                            <div class="subject-con bor clearfix m-question " data-examid="4082815" data-examtype="1" data-rulesid="1756095" data-answer="B" data-useranswer="" data-orderid="1" style="">
+                                <div class="subject-con" style="background:inherit">
+                                    <div class="sub-content ">
+                                        
+                                        <i class="subjec-daan" style="display: none;"></i>
+                                        <#if (returnDatas.otherData.testPaperInfoList??) && (returnDatas.otherData.testPaperInfoList?size>0)>
+                                        <#list returnDatas.otherData.testPaperInfoList as testPaperInfo>
+                                        <div class="sub-dotitle">
+                                        <input name="answers[${testPaperInfo_index}].id" type="hidden" value="${(testPaperInfo.id)!'0'}"/>
+                                            <em>${testPaperInfo_index+1}</em>
+                                            <i>[${(testPaperInfo.topicTypeName)!''}，${(testPaperInfo.score)!'0'}分]</i>
+                                            ${(testPaperInfo.problem_description)!''}
+                                        </div>
+                                        
+                                        <dl class="sub-answer  ">
+                                        <#if (testPaperInfo.paperOptions??) && (testPaperInfo.paperOptions?size>0)>
+                                        	<#list testPaperInfo.paperOptions as paperOption>
+                                        	<dd class="m-question-option " onclick="mySelect(this);">
+                                            	<input id="${(testPaperInfo.id)!'0'}" name="answers[${testPaperInfo_index}].optionId" type="radio" value="${(paperOption.id)!'0'}" class="st_radio" />
+                                            	<span></span><label>${(paperOption.option)!''}</label>
+                                            </dd>
+                                        	</#list>
+                                        </#if>
+                                        </dl>
+                                        </#list>
+                                        </#if>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    
+                </div>
+            </div>
+
+            <!--右侧设置-->
+            <div class="pra-right-con">
+                <div id="m__rightPart" class="pra-right-con-sub" style="z-index: 99;">
+                    <div class="time-card f-mt20 bor">
+                        <div class="y-time">
+                            <span class="f-fl"><i></i>用时<em id="e__timer">00:00:00</em></span>
+                            <!-- <span class="btn__pause stop f-fr"><a href="javascript:;"><i></i>暂停</a></span> -->
+                        </div>
+                        <!--答题卡区域-->
+                        <div class="rightArea-answer clear">
+                            <div class="ft">
+                                <!-- <div class="btn btn-one"><a href="javascript:;" class="btn__nextGoon">保存进度，下次继续</a></div> -->
+                                <div class="btn"><a href="javascript:submitForm();" class="btn__submit">交卷</a></div>
+                            </div>
+                        </div>
+                        <!--答题卡区域 end-->
+                    </div>
+                </div>
+            </div>
+            <!--右侧设置 end-->
+        </div>
+    </div>
+    </form>
+    <#else>
+    	试卷信息为空
+    </#if>
+    <script type="text/javascript">
+    	function mySelect(th){
+    		$(th).parent().find('input').removeAttr("checked");
+    		$(th).find('input').attr("checked","checked");
+    	}
+    	
+    	
+    	// 表单序列化提交
+    	function submitForm(){
+    		$.ajax({
+    			url:'${ctx}/front/testPaper/add',
+    			type:'post',
+    			data:$("#testPaperForm").serialize(),
+    			dataType:'json',
+    			success:function(_json){
+    				alert(_json.message);
+    				if(_json.status=='success'){
+    				}
+    			}
+    		});
+    		
+    	}
+    </script>
+</body>
+</html>
+</#escape>

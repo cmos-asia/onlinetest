@@ -1,5 +1,7 @@
 package org.base.online.entity;
 
+import java.util.List;
+
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -52,6 +54,10 @@ public class TestPaperInfo extends BaseEntity {
 	 * 试卷ID
 	 */
 	private java.lang.Integer paper_id;
+	/**
+	 * 瞬时字段：试卷详情
+	 */
+	private List<PaperOptions> paperOptions;
 	/**
 	 * 瞬时字段：试卷名称
 	 */
@@ -139,6 +145,15 @@ public class TestPaperInfo extends BaseEntity {
 	@Transient
 	public java.lang.String getPaperName() {
 		return paperName;
+	}
+
+	@Transient
+	public List<PaperOptions> getPaperOptions() {
+		return paperOptions;
+	}
+
+	public void setPaperOptions(List<PaperOptions> paperOptions) {
+		this.paperOptions = paperOptions;
 	}
 
 	public void setPaperName(java.lang.String paperName) {

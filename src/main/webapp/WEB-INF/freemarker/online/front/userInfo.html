@@ -1,0 +1,97 @@
+<#escape x as x?html>
+<#import "/online/front/head.html" as cmMacro />
+<@cmMacro.head />
+		<link href="../css/front/assets/nav.css" rel="stylesheet" type="text/css" />
+		<style>
+		#headerbox {
+			position: relative;
+		}
+		
+		.current{
+    		background-color: #f04800;
+    		color: #FFF;
+		}
+		
+		.my-information {
+    background: #fff;
+    border: 1px solid #dbdbdb;
+    padding: 10px 30px 20px 30px;
+    margin-bottom: 20px;
+}
+.personal-bd-nobg .my-information .message_zhu {
+    width: 100%;
+    border-bottom: 1px solid #dbdbdb;
+}
+.message_tip {
+    display: inline-block;
+}
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, p, pre, form, fieldset, input, textarea, blockquote, th, td {
+    margin: 0px;
+    padding: 0px;
+}
+		</style>
+		<link rel="stylesheet" href="../css/front/assets/index.css">
+	</head>
+	<body>
+	<@cmMacro.online_tab />
+	
+	<div class="main_content clearfix">
+		<div class="main_content clearfix">
+			<div class="le-prabg test-classificon-t clearfix clear">
+				<div class="navleft clearfix">
+					<div class="tk-box clearfix">
+						<dl>
+							<dd class=""><a href="${ctx}/front/index"><i class="home"></i>首页</a></dd>
+						</dl>
+						<dl>
+							<dt>我的题库</dt>
+							<dd class=""><a href="${ctx}/front/index"><i class="myexam"></i>开始做题</a></dd>
+							<dd class=""><a href="${ctx}/front/recordList"><i class="record"></i>我的记录</a></dd>
+						</dl>
+						<dl>
+							<dt>个人管理</dt>
+							<dd class="this"><a href="${ctx}/front/userInfo"><i class="myaccount"></i>账户安全</a></dd>
+						</dl>
+					</div>
+				</div>
+				<!--右侧中间部分-->
+				<div class="test-clawidth-more bor" id="class_frame">
+					<div class="my-information">
+            <div class="message_tip message_zhu"> <span class="title">账户管理</span> </div>
+            <div class="information-con">
+                <dl class="grzl">
+                    <dt><i class="ico-action"></i> 个人资料</dt>
+                    <dd><a href="javascript:void(0)" class="compiler"><i></i>编辑</a> 233网校网友</dd>
+                </dl>
+                <dl class="bdsj">
+                    <dt><i class=""></i> 绑定手机</dt>
+                        <dd><a href="javascript:void(0)" class="compiler"><i></i>编辑</a> 18837195325 <span>若手机更换或停用，请立即修改，避免账户被盗</span> </dd>
+                </dl>
+                <dl class="zhmm _password">
+                        <dt><i></i>账户密码</dt>
+                        <dd><a href="javascript:void(0)" class="compiler"><i></i>编辑</a> ****** </dd>
+                    </dl>
+                    <div class="box-btn clear"><a id="updateAvatarBtn" href="javascript:void(0)">保存</a> <a href="javascript:void(0)" class="quxiao">取消</a></div>
+                    
+                <div class="cline">
+                <label class="inptIcons">性别</label>
+                <label>
+                    <input id="chkSexMan" type="radio" class="xb-l" checked="checked" name="rdosex" value="1">
+                    男
+                </label>
+                <label>
+                    <input id="chkSexWoman" class="xb-l" type="radio" name="rdosex" value="2">
+                    女
+                </label>
+            </div>
+              
+            </div>
+        </div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<@cmMacro.footer />
+</body>
+</html>
+</#escape>

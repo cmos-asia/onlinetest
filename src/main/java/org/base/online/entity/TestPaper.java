@@ -42,9 +42,21 @@ public class TestPaper extends BaseEntity {
 	 */
 	private List<Subjects> subjectsList;
 	/**
+	 * 瞬时字段：试卷信息
+	 */
+	private List<TestPaperInfo> testPaperInfoList;
+	/**
 	 * 瞬时字段：科目名称
 	 */
 	private java.lang.String subjectsName;
+	/**
+	 * 瞬时字段：服务当前时间
+	 */
+	private java.util.Date serverNowDate;
+	/**
+	 * 瞬时字段：考试结束时间
+	 */
+	private java.util.Date serverEndTime;
 	/**
 	 * 生效状态（0：不可用，1：可以，2：已删除）
 	 */
@@ -118,6 +130,24 @@ public class TestPaper extends BaseEntity {
 		return subjectsName;
 	}
 
+	@Transient
+	public java.util.Date getServerNowDate() {
+		return serverNowDate;
+	}
+
+	@Transient
+	public java.util.Date getServerEndTime() {
+		return serverEndTime;
+	}
+
+	public void setServerEndTime(java.util.Date serverEndTime) {
+		this.serverEndTime = serverEndTime;
+	}
+
+	public void setServerNowDate(java.util.Date serverNowDate) {
+		this.serverNowDate = serverNowDate;
+	}
+
 	public void setSubjectsName(java.lang.String subjectsName) {
 		this.subjectsName = subjectsName;
 	}
@@ -129,6 +159,15 @@ public class TestPaper extends BaseEntity {
 
 	public void setSubjectsList(List<Subjects> subjectsList) {
 		this.subjectsList = subjectsList;
+	}
+
+	@Transient
+	public List<TestPaperInfo> getTestPaperInfoList() {
+		return testPaperInfoList;
+	}
+
+	public void setTestPaperInfoList(List<TestPaperInfo> testPaperInfoList) {
+		this.testPaperInfoList = testPaperInfoList;
 	}
 
 	public void setStatus(java.lang.Integer value) {
