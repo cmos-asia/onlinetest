@@ -238,7 +238,7 @@ public class FrontIndexController extends FrontBaseController {
 	 */
 	@RequestMapping("/testPaper/add")
 	public @ResponseBody ReturnDatas save(Model model,
-			PaperAnswerList paperAnswerList, String paper_id,
+			PaperAnswerList paperAnswerList, String paper_id, String used_time,
 			HttpSession session, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		ReturnDatas returnObject = ReturnDatas.getErrorReturnDatas();
@@ -267,11 +267,13 @@ public class FrontIndexController extends FrontBaseController {
 
 		// 考试记录查看
 		TestRecord testRecord = getTestRecord(testPaper, s);
+
 		if (testRecord == null) {
 			returnObject.setMessage("未知错误");
 			return returnObject;
 		}
-
+		// 用时
+		testRecord.setUsed_time(NumberUtils.toLong(used_time, 0));
 		// 根据试卷id查找试题信息
 		int rightScore = 0;
 
@@ -315,7 +317,6 @@ public class FrontIndexController extends FrontBaseController {
 
 		testRecord.setAnswer_finish_time(nowDate);
 		testRecord.setUpdate_time(nowDate);
-		testRecord.setUsed_time(200L);
 		testRecord.setRight_score(rightScore);
 		testRecord.setIsPass(isPass);
 		testRecord.setStatus(Enumerations.TestStatus.已做.getTestStatus());

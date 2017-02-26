@@ -51,6 +51,7 @@
             <h2 class="h2"> 
 				${(returnDatas.otherData.name)!''}
 				<input name="paper_id" value="${(returnDatas.otherData.id)!''}" type="hidden"/>
+				<input name="used_time" id="used_time" value="" type="hidden"/>
             </h2>
             <div class="info">
                 <p>◇ 本卷科目类型为&nbsp;${(returnDatas.otherData.subjectsName)!''}，作答时间为${(returnDatas.otherData.answer_time)!''}分钟，总分：${(returnDatas.otherData.total_score)!''}分
@@ -132,11 +133,18 @@
     
     var startDate;
     var endDate;
+    var startDateTimes;
+    var endDateTimes;
+    var usedTimes;
     $(document).ready(function(){
    		//显示倒计时
    		startDate = Date.parse(('${((returnDatas.otherData.serverNowDate)?string('yyyy-MM-dd HH:mm:ss'))!''}').replace(/-/g, "/"));
    		endDate = Date.parse(('${((returnDatas.otherData.serverEndTime)?string('yyyy-MM-dd HH:mm:ss'))!''}').replace(/-/g, "/"));
-   		window.setInterval(function(){ShowCountDown(startDate,endDate);}, 1000);
+   		startDateTimes= new Date(startDate).getTime();
+   		endDateTimes= new Date(endDate).getTime();
+   		usedTimes=0;
+   		setInterval("ShowCountDown()",1000); 
+   		//window.setInterval(function(){ShowCountDown(startDateTimes,endDateTimes);}, 1000);
    	});
     
     	function mySelect(th){
@@ -147,6 +155,7 @@
     	
     	// 表单序列化提交
     	function submitForm(){
+    		$("#used_time").val(usedTimes/1000);
     		$.ajax({
     			url:'${ctx}/front/testPaper/add',
     			type:'post',
@@ -165,16 +174,17 @@
     		
     	}
     	
- function ShowCountDown(startDate,endDate) { 
-    	var now = new Date(startDate).getTime();
-    	
-    	var leftTime=endDate-now; 
+ function ShowCountDown() { 
+    	var leftTime=endDateTimes-startDateTimes; 
+    	if(leftTime<0){
+    		submitForm();
+    		return;
+    	}
     	var leftsecond = parseInt(leftTime/1000);
-    	var day = Math.floor(leftsecond/(24*60*60));
-    	var hour=Math.floor((leftsecond-day*24*60*60)/3600); 
-    	var minute=Math.floor((leftsecond-day*24*60*60-hour*3600)/60); 
-    	var second=Math.floor(leftsecond-day*24*60*60-hour*3600-minute*60);
-    	 $("#"+showCountDown).html("");
+    	var hour=Math.floor(leftsecond/3600); 
+    	var minute=Math.floor((leftsecond-hour*3600)/60); 
+    	var second=Math.floor(leftsecond-hour*3600-minute*60);
+    	 $("#e__timer").html("");
     	if(second < 10 || minute <10 || hour<10){
     		var str_hour = hour;
     		var str_minute=minute;
@@ -188,18 +198,12 @@
     		if(second < 10){
     			str_second="0"+second;
     		}
-    		if(day==0){
-    			$("#"+showCountDown).append("<span class='bg_r color_f _times'>"+str_hour+"</span>:<span class='bg_r color_f _times'>"+str_minute+"</span>:<span class='bg_r color_f _times'>"+str_second+"</span>");
-    		}else{
-    			$("#"+showCountDown).append(day+"天 "+"<span class='bg_r color_f _times'>"+str_hour+"</span>:<span class='bg_r color_f _times'>"+str_minute+"</span>:<span class='bg_r color_f _times'>"+str_second+"</span>" );
-    		}
+    		$("#e__timer").html(""+str_hour+":"+str_minute+":"+str_second);
     	}else{
-    		if(day==0){
-    			$("#"+showCountDown).append("<span class='bg_r color_f _times'>"+hour+"</span>:<span class='bg_r color_f _times'>"+minute+"</span>:<span class='bg_r color_f _times'>"+second);
-    		}else{
-    			$("#"+showCountDown).append("<span class='bg_r color_f _times'>"+day+"天 "+hour+"</span>:<span class='bg_r color_f _times'>"+minute+"</span>:<span class='bg_r color_f _times'>"+second); 
-    		}
-    	} 
+    		$("#e__timer").html(""+hour+":"+minute+":"+second);
+    	}
+    	startDateTimes= startDateTimes+1000;
+    	usedTimes=usedTimes+1000;
     	}
     </script>
 </body>
