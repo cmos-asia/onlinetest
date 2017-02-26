@@ -143,8 +143,12 @@
     			data:$("#testPaperForm").serialize(),
     			dataType:'json',
     			success:function(_json){
-    				alert(_json.message);
+    				
     				if(_json.status=='success'){
+    					var recordId=_json.message;
+    					window.location.href="${ctx}/front/result?recordId="+recordId;
+    				}else{
+    					alert(_json.message);
     				}
     			}
     		});

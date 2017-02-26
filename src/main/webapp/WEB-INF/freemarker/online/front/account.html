@@ -1,0 +1,162 @@
+<#escape x as x?html>
+<#import "/online/front/head.html" as cmMacro />
+<@cmMacro.head />
+        <title>在线测试中心</title>
+        <link href="../css/front/assets/nav.css" rel="stylesheet" type="text/css" />
+        <style>
+        #headerbox {
+        position: relative;
+        }
+        
+.input_radio{
+	width:24px;
+	height:48px;
+	border: 1px solid #e0e0e0;
+	padding-left: 15px;
+	display: inline;
+	float: left; 
+	margin-right:20px;
+}
+
+.input_radio_span{
+	width:24px;
+	height:48px;
+	text-align: justify;
+	display: inline;
+	float: left; 
+	margin-right:20px;
+    line-height: 50px;
+    display: block;
+}
+</style>
+        <link rel="stylesheet" href="../css/front/assets/index.css">
+        <link rel="stylesheet" href="../css/front/assets/list.css">
+        <link rel="stylesheet" href="../css/front/assets/recoad.css">
+        <link rel="stylesheet" type="text/css" href="../css/front/assets/login.css" />
+    </head>
+    <body>
+      <@cmMacro.online_tab />
+    
+    <div class="main_content clearfix">
+        <div class="main_content clearfix">
+            <div class="le-prabg test-classificon-t clearfix clear">
+                <div class="navleft clearfix">
+                   <div class="tk-box clearfix">
+						<dl>
+							<dd class=""><a href="${ctx}/front/index"><i class="home"></i>首页</a></dd>
+						</dl>
+						<dl>
+							<dt>我的题库</dt>
+							<dd class=""><a href="${ctx}/front/index"><i class="myexam"></i>开始做题</a></dd>
+							<dd class=""><a href="${ctx}/front/recordList"><i class="record"></i>我的记录</a></dd>
+						</dl>
+						<dl>
+							<dt>个人管理</dt>
+							<dd class="this"><a href="${ctx}/front/account"><i class="myaccount"></i>账户安全</a></dd>
+						</dl>
+					</div>
+                </div>
+                <!--右侧中间部分-->
+                <div class="test-clawidth-more bor" id="class_frame">
+                    <div class="cap-chose bor f-mb20">
+                        <ul class="pracl-mlist">
+                            <li><a href="/tiku/history/187" class="this">账户管理</a></li>
+                        </ul>
+                        
+                    </div>
+                    <div class="pracl-dalist bor">
+                        <div class="fr regForm">
+                            <input id="captchaType" type="hidden" value="0" />
+                            
+                            <form action="javascript:void(0)" id="mobileUpdateForm">
+                            <#if returnDatas.data??>
+                                <div class="frame">
+                                    <div class="frameInput">
+                                        <label>手机号：</label>
+                                        <input class="frameInput_text" name="phone" id="phone" value="${(returnDatas.data.phone)!''}" autocomplete="off" type="text" placeholder="请输入您常用的手机号码" />
+                                        <div class="frameInfo msg-box"></div>
+                                    </div>
+                                </div>
+                                <div class="frame">
+                                    <div class="frameInput">
+                                        <label>姓名：</label>
+                                        <input class="frameInput_text" name="name" id="name" value="${(returnDatas.data.name)!''}" autocomplete="off" type="text" placeholder="请输入您的姓名" />
+                                        <div class="frameInfo msg-box"></div>
+                                    </div>
+                                </div>
+                                <div class="frame">
+                                    <div class="frameInput">
+                                        <label>专业：</label>
+                                        <input class="frameInput_text" name="major" id="major" value="${(returnDatas.data.major)!''}" autocomplete="off" type="text" placeholder="请输入您的专业" />
+                                        <div class="frameInfo msg-box"></div>
+                                    </div>
+                                </div>
+                                <div class="frame">
+                                    <div class="frameInput">
+                                        <label>性别:</label>
+                                        <label><input type="radio" id="sex_nan" class="input_radio" name="sex" value="男">男</label>
+                                        <label><input type="radio" id="sex_nv" class="input_radio" name="sex" value="女">女</label>
+                                        <div class="frameInfo msg-box"></div>
+                                    </div>
+                                </div>
+                                <div class="frame">
+                                    <div class="frameInput">
+                                        <label>原密码：</label>
+                                        <input type="text" style="display: none;">
+                                        <input class="frameInput_text" name="old_password" id="old_password" autocomplete="off" type="password" placeholder="长度为6-20个字符" />
+                                        <a href="javascript:void(0)" class="eyesClose"></a>
+                                        <div class="frameInfo msg-box"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="frame">
+                                    <div class="frameInput">
+                                        <label>密码：</label>
+                                        <input type="text" style="display: none;">
+                                        <input class="frameInput_text" name="password" id="password" autocomplete="off" type="password" placeholder="长度为6-20个字符" />
+                                        <a href="javascript:void(0)" class="eyesClose"></a>
+                                        <div class="frameInfo msg-box"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="frame">
+                                    <input class="submit" name="" type="submit" value="保存" onclick="updateSubmit();"/>
+                                </div>
+                                </#if>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	<@cmMacro.footer />
+</body>
+<script>
+$(document).ready(function(){
+	var sex="${(returnDatas.data.sex)!'男'}";
+	$("#sex_nan").attr("checked","checked");
+	if(sex=='女'){
+		$("#sex_nv").attr("checked","checked");
+	}
+});
+
+function updateSubmit(){
+	$.ajax({
+        type: "POST",
+        url:"${ctx}/front/student/update",
+        data:$('#mobileUpdateForm').serialize(),// 你的formid
+        async: false,
+        success: function(_json) {
+        	if(_json.status=="success"){
+        		alert("信息修改成功");
+        		window.focus();
+			}else{
+				alert(_json.message);
+			}
+        }
+    });
+}
+</script>
+</html>
+</#escape>

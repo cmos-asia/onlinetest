@@ -76,13 +76,14 @@ public class FrontIndexController extends FrontBaseController {
 	// 登录页面路径
 	private static String login_url = "/online/front/login";
 	// 账户安全/个人资料页面
-	private static String userInfo_url = "/online/front/userInfo";
+	private static String account_url = "/online/front/account";
 	// 答题记录列表页面
 	private static String recordList_url = "/online/front/recordList";
 	// 试题页面
 	private static String testPaper_url = "/online/front/testPaper";
 	// 试题列表页面
 	private static String testPaperList_url = "/online/front/testPaperList";
+	private static String result_url = "/online/front/result";
 
 	/**
 	 * 首页的映射
@@ -135,7 +136,7 @@ public class FrontIndexController extends FrontBaseController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "/userInfo")
+	@RequestMapping(value = "/account")
 	public String userInfo(Model model, HttpServletRequest request,
 			HttpSession session, HttpServletResponse response, User user)
 			throws Exception {
@@ -146,7 +147,7 @@ public class FrontIndexController extends FrontBaseController {
 		Student s = (Student) session.getAttribute("login_student");
 		returnObject.setData(s);
 		model.addAttribute(GlobalStatic.returnDatas, returnObject);
-		return userInfo_url;
+		return account_url;
 	}
 
 	/**
@@ -320,6 +321,9 @@ public class FrontIndexController extends FrontBaseController {
 		testRecord.setStatus(Enumerations.TestStatus.已做.getTestStatus());
 		testRecordService.update(testRecord);
 		testRecordInfoService.save(recordInfoList);
+		returnObject.setStatus(ReturnDatas.SUCCESS);
+		int recordId = testRecord.getId();
+		returnObject.setMessage(String.valueOf(recordId));
 		return returnObject;
 	}
 
@@ -481,6 +485,35 @@ public class FrontIndexController extends FrontBaseController {
 		return recordList_url;
 	}
 
+	@RequestMapping(value = "/result")
+	public String result(Model model, HttpServletRequest request,
+			HttpSession session, HttpServletResponse response, User user)
+			throws Exception {
+		ReturnDatas returnObject = ReturnDatas.getSuccessReturnDatas();
+		String recordId = request.getParameter("recordId");
+		model.addAttribute("siteName", "我是中文站点");
+		String ctx = request.getParameter("ctx");
+		model.addAttribute("ctx", ctx);
+		Student s = (Student) session.getAttribute("login_student");
+		returnObject.setData(s);
+		if (s == null) {
+			model.addAttribute(GlobalStatic.returnDatas, returnObject);
+			return result_url;
+		}
+		return result_url;
+	}
+
+	/**
+	 * 退出接口
+	 * 
+	 * @param model
+	 * @param request
+	 * @param session
+	 * @param response
+	 * @param user
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping(value = "/logout")
 	public String logout(Model model, HttpServletRequest request,
 			HttpSession session, HttpServletResponse response, User user)
@@ -621,6 +654,76 @@ public class FrontIndexController extends FrontBaseController {
 
 	}
 
+	/**
+	 * 
+	 * @param model
+	 * @param session
+	 * @param student
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/student/update")
+	public @ResponseBody ReturnDatas studentUpdate(Model model,
+			String old_password, HttpSession session, Student student,
+			HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		ReturnDatas returnObject = ReturnDatas.getErrorReturnDatas();
+		try {
+
+			// 手机号
+			String phone = student.getPhone();
+
+			// 密码（明文）
+			String password = student.getPassword();
+			if (StringUtils.isBlank(phone)) {
+				returnObject.setMessage("手机号为空");
+				return returnObject;
+			}
+
+			if (StringUtils.isBlank(password)
+					|| StringUtils.isBlank(old_password)) {
+				returnObject.setMessage("密码为空");
+				return returnObject;
+			}
+
+			if (!isMobileNO(phone)) {
+				returnObject.setMessage("手机号格式不正确");
+				return returnObject;
+			}
+
+			// 根据手机号查询已有学生信息，避免手机号重复
+			List<Student> studentList = studentService
+					.findStudentByPhone(phone);
+			Student oldStudent = studentList.get(0);
+
+			String oldPwdMd5 = SecUtils.encoderByMd5With32Bit(old_password);
+			if (!oldPwdMd5.equalsIgnoreCase(oldStudent.getPassword())) {
+				returnObject.setMessage("原密码错误");
+				return returnObject;
+			}
+
+			// 密码进行md5加密
+			student.setId(oldStudent.getId());
+			student.setPassword(SecUtils.encoderByMd5With32Bit(password));
+			student.setCreate_time(oldStudent.getCreate_time());
+			student.setUpdate_time(new Date());
+			returnObject.setMessage(MessageUtils.UPDATE_SUCCESS);
+			student.setUpdate_time(new Date());
+			studentService.saveorupdate(student);
+			session.setAttribute("login_student", student);
+			returnObject.setStatus(ReturnDatas.SUCCESS);
+		} catch (Exception e) {
+			String errorMessage = e.getLocalizedMessage();
+			logger.error(errorMessage);
+			returnObject.setStatus(ReturnDatas.ERROR);
+			returnObject.setMessage(MessageUtils.UPDATE_ERROR);
+		}
+		return returnObject;
+
+	}
+
 	@RequestMapping("/student/login")
 	public @ResponseBody ReturnDatas studentLogin(Model model,
 			HttpSession session, Student student, HttpServletRequest request,
@@ -671,12 +774,11 @@ public class FrontIndexController extends FrontBaseController {
 			returnObject.setMessage(MessageUtils.UPDATE_ERROR);
 		}
 		return returnObject;
-
 	}
 
 	public static boolean isMobileNO(String mobiles) {
 		Pattern p = Pattern
-				.compile("^((13[0-9])|(17[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$");
+				.compile("^((13[0-9])|(17[0-9])|(15[^4,\\D])|(18[0-9]))\\d{8}$");
 		Matcher m = p.matcher(mobiles);
 		return m.matches();
 	}

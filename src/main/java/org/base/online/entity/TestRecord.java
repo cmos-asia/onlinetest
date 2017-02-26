@@ -2,6 +2,7 @@ package org.base.online.entity;
 
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -55,6 +56,10 @@ public class TestRecord extends BaseEntity {
 	 * 学生ID
 	 */
 	private java.lang.Integer student_id;
+	/**
+	 * 瞬时字段：学生姓名
+	 */
+	private java.lang.String student_name;
 	/**
 	 * 试题表ID
 	 */
@@ -293,5 +298,14 @@ public class TestRecord extends BaseEntity {
 			return true;
 		TestRecord other = (TestRecord) obj;
 		return new EqualsBuilder().append(getId(), other.getId()).isEquals();
+	}
+
+	@Transient
+	public java.lang.String getStudent_name() {
+		return student_name;
+	}
+
+	public void setStudent_name(java.lang.String student_name) {
+		this.student_name = student_name;
 	}
 }
