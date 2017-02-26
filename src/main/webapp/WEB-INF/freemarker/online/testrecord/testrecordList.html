@@ -88,18 +88,17 @@ function deleteTestRecord(){
                     <thead>
                     <tr>
                         <!--first_start_no_export-->
-                        <th class="center">
+                        <!-- <th class="center">
                             <label class="position-relative">
                                 <input class="ace" type="checkbox">
                                 <span class="lbl"></span>
                             </label>
-                        </th>
-                        <th>操作</th>
+                        </th> -->
+                        <!-- <th>操作</th> -->
                         <!--first_end_no_export-->
 						<th id="th_student_id" >学生</th>
-						<th id="th_paper_id" >试题</th>
 						<th id="th_paper_name" >试题名称</th>
-						<th id="th_used_time" >用时</th>
+						<th id="th_used_time" >用时（秒）</th>
 						<th id="th_total_score" >总分</th>
 						<th id="th_right_score" >得分</th>
 						<th id="th_answer_start_time" >作答开始时间</th>
@@ -117,35 +116,23 @@ function deleteTestRecord(){
 					 <#list returnDatas.data as _data>
                             <!--start_no_export-->
                             <tr class="">
-                                <td class="center">
+                                <!-- <td class="center">
                                     <label class="position-relative">
                                         <input name="check_li" value="${_data.id}" class="ace" type="checkbox">
                                         <span class="lbl"></span>
                                     </label>
-                                </td>
-                                <td>
+                                </td> -->
+                                <!-- <td>
                                     <div class="hidden-sm hidden-xs btn-group">
                                         <button class="btn btn-xs btn-info"
-                                                onclick="myhref('${ctx}/testrecord/update/pre?id=${(_data.id)!''}');">
+                                                onclick="myhref('${ctx}/testrecordinfo/list?id=${(_data.id)!''}');">
                                             <i class="ace-icon fa fa-pencil bigger-120">答题详情</i>
                                         </button>
-                                        <!-- <button class="btn btn-xs btn-info"
-                                                onclick="myhref('${ctx}/testrecord/update/pre?id=${(_data.id)!''}');">
-                                            <i class="ace-icon fa fa-pencil bigger-120"></i>
-                                        </button>
-                                        <button class="btn btn-xs btn-danger"
-                                                onclick="mydelete('${ctx}/testrecord/delete?id=${(_data.id)!''}','${ctx}/testrecord/list');">
-                                            <i class="ace-icon fa fa-trash-o bigger-120"></i>
-                                        </button> -->
                                     </div>
-                                </td>
+                                </td> -->
                                 <!--end_no_export-->
-
 							<td >
-								${(_data.student_id)!0}
-							</td>
-							<td >
-								${(_data.paper_id)!0}
+								${(_data.student_name)!''}
 							</td>
 							<td >
 								${(_data.paper_name)!''}

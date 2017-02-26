@@ -25,76 +25,56 @@
 						<dl>
 							<dt>我的题库</dt>
 							<dd class=""><a href="${ctx}/front/index"><i class="myexam"></i>开始做题</a></dd>
-							<dd class="this"><a href="${ctx}/front/myrecord"><i class="record"></i>我的记录</a></dd>
+							<dd class="this"><a href="${ctx}/front/recordList"><i class="record"></i>我的记录</a></dd>
 						</dl>
 						<dl>
 							<dt>个人管理</dt>
-							<dd class=""><a href="${ctx}/front/userInfo"><i class="myaccount"></i>账户安全</a></dd>
+							<dd class=""><a href="${ctx}/front/account"><i class="myaccount"></i>账户安全</a></dd>
 						</dl>
 					</div>
                 </div>
-                 <#if (returnDatas.otherData??) && (returnDatas.otherData?size>0)>
-								<#list returnDatas.otherData as _data>
-								</#list>
-								</#if>
                 <!--右侧中间部分-->
                 <div class="test-clawidth-more bor" id="class_frame">
                     <div class="cap-chose bor f-mb20">
                         <ul class="pracl-mlist">
                             <li><a href="/tiku/history/187" class="this">练习记录</a></li>
                         </ul>
-                        <div class="pracl-nav">
-                            <div class="tagnav clearfix">
-                                <dl class="clearfix clear">
-                                    <dt>科目：</dt>
-                                    <dd class=" this" data-classid="190">
-                                    <a class="a-class" href="#">
-                                        <b></b> 建设工程法规及相关知识
-                                    </a>
-                                    </dd>
-                                </dl>
-                            </div>
-                        </div>
                     </div>
                     <div class="pracl-dalist bor">
                         <ul>
+                        <#if (returnDatas.otherData??) && (returnDatas.otherData?size>0)>
+								<#list returnDatas.otherData as _data>
+								
                             <li class="pdscon">
                                 <div class="pda-list">
                                     <span class="dal-but" data-index="0">
-                                        <a href="#" class="check cjx">查看解析</a>
-                                        <a href="#">重新测试</a>
+                                    <#if _data.status==1>
+                                    	<a href="${ctx}/front/result?recordId=${(_data.id)!''}" class="check cjx">查看解析</a>
+                                        <a href="${ctx}/front/testPaper?id=${(_data.paper_id)!'0'}">重新测试</a>
+                                    <#else>
+                                    	<a href="${ctx}/front/testPaper?id=${(_data.paper_id)!'0'}" class="check cjx">继续做题</a>
+                                    </#if>
+                                       
                                     </span>
                                     <div style="cursor: pointer;" data-index="0" class="parSpan">
-                                        <h3><span>[在线考试]</span>2017二级建造师考试《法规及相关知识》摸底试卷二（02月19日）</h3>
+                                        <h3><span>[
+                                        <#if _data.status==1>
+                                        已交卷
+                                        <#else>
+                                        未交卷
+                                    	</#if>
+                                        ]</span>${(_data.paper_name)!''}</h3>
                                         <p>
-                                            <span>2017-02-19</span>
-                                            <span>用时：0 秒</span>
-                                            <span class="green">得分：0分</span>
+                                            <span>${((_data.create_time)?string('yyyy-MM-dd hh:mm:ss'))!''}</span>
+                                            <span>用时：${(_data.used_time)!'0'} 秒</span>
+                                            <span>总分：${(_data.total_score)!'0'} 分</span>
+                                            <span class="green">得分：${(_data.right_score)!'0'}分</span>
                                         </p>
                                     </div>
                                 </div>
-                                <div class="pdalist-box" id="divRelate0">
-                                    <div class="pda-list-con clear clearfix">
-                                        <i></i>
-                                        <span class="dal-but">
-                                            <a target="_parent" href="#" class="check">
-                                                继续做题
-                                            </a>
-                                        </span>
-                                        <div>
-                                            <h3>
-                                            <a target="_parent" href="javascript:void(0)">
-                                                <span>[在线考试]</span>2017二级建造师考试《法规及相关知识》摸底试卷二（02月19日）
-                                            </a>
-                                            </h3>
-                                            <p>
-                                                <span>2017-02-19</span>
-                                                <span>用时：0 秒</span>
-                                                <span class="green">得分：0分</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
+                               </li>
+                              </#list>
+							</#if>  
                             </ul>
                         </div>
                     </div>

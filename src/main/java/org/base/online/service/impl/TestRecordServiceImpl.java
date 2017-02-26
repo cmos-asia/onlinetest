@@ -100,12 +100,15 @@ public class TestRecordServiceImpl extends BaseSpringServiceImpl implements
 	@Override
 	public List<TestRecord> findTestRecordListBySid(int studentId)
 			throws Exception {
+		Page page = new Page();
+		page.setSort("desc");
+		page.setOrder("id");
 		Finder finder = new Finder();
 		finder.append("select * from "
 				+ ClassUtils.getTableNameByClass(TestRecord.class));
 		finder.append(" where student_id=" + studentId);
-		finder.append(" and status !=2 order by create_time desc");
-		return super.findListDataByFinder(finder, null, TestRecord.class, null);
+		finder.append(" and (status !=2)");
+		return super.findListDataByFinder(finder, page, TestRecord.class, null);
 	}
 
 }

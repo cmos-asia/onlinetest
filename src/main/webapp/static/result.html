@@ -3,7 +3,7 @@
     <head>
         <meta name="viewport" content="width=device-width" />
         <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>在线考试</title>
         <link href="./assets/question.css" rel="stylesheet" />
         <link href="./assets/nav.css" rel="stylesheet" type="text/css" />
@@ -38,7 +38,7 @@
         overflow: hidden;
         }
         .st_radio{
-            position: absolute;left: 9px;top:12px;
+        position: absolute;left: 9px;top:12px;
         }
         </style>
         <link rel="stylesheet" href="./assets/index.css">
@@ -48,7 +48,7 @@
             <div id="top-wrap">
                 <div class="top-nav-wrap" id="headerbox">
                     <div class="tn-header">
-                    
+                        
                         <div class="tn-person-r">
                             <!-- nologin -->
                             <div class="tn-title" id="nologinbox"><a href="./login.html"  target="_self" class="tn-tab"><em class="denglu"></em>登录</a><b>|</b><a href="./register.html" onClick="return ghead.register();" target="_self" class="tn-tab ui-denglu">注册</a>
@@ -59,8 +59,6 @@
             </div>
         </div>
     </div>
-    
-    
     <div class="pracontent clearfix" style="margin-top: 20px">
         <div class="m-examHead bor ">
             <div class="score">
@@ -73,8 +71,84 @@
                 <p>◇ 问卷描述</p>
             </div>
         </div>
-        </div>
     </div>
-    <script src="./common/footer.js"></script>
+</div>
+<div class="dopra-con clearfix">
+    <div class="pra-left-con pra-right-font16">
+        <!-- 练习模式做题-->
+        <style>
+        #questionModule { width: 100%; min-height: 300px; background: none; overflow: hidden; position: relative; }
+        #questionModule > ul { width: 100%; height: auto; }
+        #questionModule.cross-range { margin-bottom: 20px; }
+        #questionModule.cross-range > ul { width: 100%; height: 100%; position: absolute; top: 0; left: 0; }
+        #questionModule.cross-range > ul > li { float: left; width: 100%; overflow: hidden; }
+        .pra-left-con{float: none;width: 940px;margin:0 auto;}
+        </style>
+        <div id="questionModule" class="" style="min-height: 604px;">
+            <div class="m__ruleTitle">
+                <div class="m-secpart"> 一、单项选择题(本题型共24小题，每小题1分，共24分，每小题只有一个正确答案，请从每小题的备选答案中选出一个你认为正确的答案，用鼠标点击相应的选项。)</div>
+            </div>
+            <ul class="m__ruleQuest">
+                <li style="">
+                    <div class="subject-con bor clearfix m-question disabled" >
+                        <div class="subject-con" style="background:inherit">
+                            <div class="sub-content sub-conanswer">
+                                <i class="subjec-daan subjec-wrong"></i>
+                                <div class="sub-dotitle">
+                                    <em>1</em>
+                                    <i>[单选题]</i>
+                                    
+                                    晨曦公司向伟东公司出售并交付其生产的残疾人轮椅20台，伟东公司未付款。因欠北海公司债务，晨曦公司以协议形式将其对伟东公司的债权转让给北海公司抵债，并通知了伟东公司。下列关于该债权转让事项的表述中，不正确的是（　　）。
+                                    
+                                </div>
+                                
+                                <dl class="sub-answer  sub-answer-no">
+                                    
+                                    <dd class="m-question-option cho-this" data-value="A">
+                                    <i></i><span>A.</span>晨曦公司债权转让通知到达伟东公司时，才对伟东公司发生债权转让效力
+                                    </dd>
+                                    
+                                    <dd class="m-question-option  right-this" data-value="B">
+                                    <i></i><span>B.</span>晨曦公司与北海公司转让协议生效时，对伟东公司同时发生债权转让效力
+                                    </dd>
+                                    
+                                    <dd class="m-question-option " data-value="C">
+                                    <i></i><span>C.</span>晨曦公司移转债权无须征得伟东公司的同意即产生法律上的效力
+                                    </dd>
+                                    
+                                    <dd class="m-question-option " data-value="D">
+                                    <i></i><span>D.</span>晨曦公司与北海公司的协议有效，北海公司可不通过晨曦公司而直接向伟东公司主张债权 <br>
+                                    </dd>
+                                    
+                                </dl>
+                            </div>
+                        </div>
+                        <div class="m__answerLine refer-answer clearfix" style="display:block;">
+                            <div class="reck">
+                                
+                                参考答案：<em class="right">B</em>
+                                您的答案：<em class="wrong">A</em>
+                                
+                            </div>
+                            <ul>
+                                <li class="nobro">
+                                    <a href="javascript:void(0)" class="btn__scbt scbt ">
+                                        <i></i>收藏本题
+                                    </a>
+                                </li>
+                                
+                                <li><a href="javascript:;" class="btn__jc jc"><i></i>纠错</a></li>
+                                
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+              </li>
+            </ul>
+        </div>
+    </div></div>
+    
+</div>
+<script src="./common/footer.js"></script>
 </body>
 </html>

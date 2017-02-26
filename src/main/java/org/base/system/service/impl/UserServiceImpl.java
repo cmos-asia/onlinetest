@@ -14,7 +14,6 @@ import org.base.frame.util.Page;
 import org.base.system.entity.Org;
 import org.base.system.entity.Role;
 import org.base.system.entity.User;
-import org.base.system.entity.UserOrg;
 import org.base.system.entity.UserRole;
 import org.base.system.service.BaseSpringServiceImpl;
 import org.base.system.service.IUserOrgService;
@@ -33,94 +32,85 @@ import org.springframework.stereotype.Service;
  * @see org.springrain.springrain.service.impl.User
  */
 @Service("userService")
-public class UserServiceImpl extends BaseSpringServiceImpl implements IUserService {
-	
+public class UserServiceImpl extends BaseSpringServiceImpl implements
+		IUserService {
+
 	@Resource
 	private IUserOrgService userOrgService;
-	
+
 	@Resource
 	private IUserRoleMenuService userRoleMenuService;
 
 	@Override
 	public String saveUser(User entity) throws Exception {
-		String id=super.save(entity).toString();
+		String id = super.save(entity).toString();
 		updateUserInfo(entity);
-		
+
 		return id;
 	}
 
 	@Override
-	@CacheEvict(value=GlobalStatic.qxCacheKey,allEntries=true)  
+	@CacheEvict(value = GlobalStatic.qxCacheKey, allEntries = true)
 	public Integer updateUser(User entity) throws Exception {
-		 Integer update = super.update(entity,true);
-		 updateUserInfo(entity);
+		Integer update = super.update(entity, true);
+		updateUserInfo(entity);
 		return update;
 	}
-	
-	private void  updateUserInfo(User user)throws Exception {
-		String userId=user.getId();
-		Finder f_del=Finder.getDeleteFinder(UserOrg.class).append(" WHERE userId=:userId ");
-		f_del.setParam("userId",userId);
-		super.update(f_del);
-		
-		Finder f_del_role=Finder.getDeleteFinder(UserRole.class).append(" WHERE userId=:userId ");
-		f_del_role.setParam("userId",userId);
-		super.update(f_del_role);
-		
-		
-		
-		List<Org> list = user.getUserOrgs();
-		List<UserOrg> listuo=new ArrayList<UserOrg>();
-		for(Org org:list){
-			UserOrg uo=new UserOrg();
-			uo.setUserId(userId);
-			uo.setOrgId(org.getId());
-			listuo.add(uo);
-		}
-		if(CollectionUtils.isEmpty(listuo)){
-			return;
-		}
-		
-		super.save(listuo);
-		
-		
-		
+
+	private void updateUserInfo(User user) throws Exception {
+		String userId = user.getId();
+		// Finder f_del = Finder.getDeleteFinder(UserOrg.class).append(
+		// " WHERE userId=:userId ");
+		// f_del.setParam("userId", userId);
+		// super.update(f_del);
+
+		// Finder f_del_role = Finder.getDeleteFinder(UserRole.class).append(
+		// " WHERE userId=:userId ");
+		// f_del_role.setParam("userId", userId);
+		// super.update(f_del_role);
+
+		// List<Org> list = user.getUserOrgs();
+		// List<UserOrg> listuo=new ArrayList<UserOrg>();
+		// for(Org org:list){
+		// UserOrg uo=new UserOrg();
+		// uo.setUserId(userId);
+		// uo.setOrgId(org.getId());
+		// listuo.add(uo);
+		// }
+		// if(CollectionUtils.isEmpty(listuo)){
+		// return;
+		// }
+
+		// super.save(listuo);
+
 		List<Role> listRole = user.getUserRoles();
-		List<UserRole> listur=new ArrayList<UserRole>();
-		for(Role role:listRole){
-			UserRole ur=new UserRole();
+		List<UserRole> listur = new ArrayList<UserRole>();
+		for (Role role : listRole) {
+			UserRole ur = new UserRole();
 			ur.setUserId(userId);
 			ur.setRoleId(role.getId());
 			listur.add(ur);
 		}
-		if(CollectionUtils.isEmpty(listur)){
+		if (CollectionUtils.isEmpty(listur)) {
 			return;
 		}
-		
+
 		super.save(listur);
-		
-		
-		
-		
-		
-		
+
 	}
-	
-	
 
 	@Override
 	public User findUserById(Object id) throws Exception {
-		
-		User u=super.findById(id, User.class);
-		
-		String userId=u.getId();
-		
+
+		User u = super.findById(id, User.class);
+
+		String userId = u.getId();
+
 		List<Org> listOrg = userOrgService.findOrgByUserId(userId);
 		u.setUserOrgs(listOrg);
 		List<Role> roleByUserId = userRoleMenuService.findRoleByUserId(userId);
 		u.setUserRoles(roleByUserId);
-		
-		
+
 		return u;
 	}
 
@@ -135,8 +125,8 @@ public class UserServiceImpl extends BaseSpringServiceImpl implements IUserServi
 	 * @throws Exception
 	 */
 	@Override
-	public <T> List<T> findListDataByFinder(Finder finder, Page page, Class<T> clazz, Object o)
-			throws Exception {
+	public <T> List<T> findListDataByFinder(Finder finder, Page page,
+			Class<T> clazz, Object o) throws Exception {
 		User user = (User) o;
 		// ==执行分页查询
 		// user.setFrameTableAlias("tu");
@@ -147,7 +137,7 @@ public class UserServiceImpl extends BaseSpringServiceImpl implements IUserServi
 		super.getFinderWhereByQueryBean(finder, user);
 		super.getFinderOrderBy(finder, page);
 		List<T> queryForList = super.queryForList(finder, clazz, page);
-		
+
 		return queryForList;
 	}
 
@@ -168,24 +158,23 @@ public class UserServiceImpl extends BaseSpringServiceImpl implements IUserServi
 	 * @throws Exception
 	 */
 	@Override
-	public <T> File findDataExportExcel(Finder finder, String ftlurl, Page page, Class<T> clazz,
-			Object o) throws Exception {
+	public <T> File findDataExportExcel(Finder finder, String ftlurl,
+			Page page, Class<T> clazz, Object o) throws Exception {
 		return super.findDataExportExcel(finder, ftlurl, page, clazz, o);
 	}
 
 	@Override
-	
 	@Caching(evict = {
 			@CacheEvict(value = GlobalStatic.cacheKey, key = "'findRoleByUserId_'+#userId"),
 			@CacheEvict(value = GlobalStatic.cacheKey, key = "'getRolesAsString_'+#userId"),
 			@CacheEvict(value = GlobalStatic.cacheKey, key = "'findUserByRoleId_'+#userId"),
 			@CacheEvict(value = GlobalStatic.cacheKey, key = "'findAllRoleAndMenu'") })
-	
 	public void updateRoleUser(String userId, String roleId) throws Exception {
 		// 删除
 		// Finder finder=new
 		// Finder("delete from t_user_role where userId=:userId");
-		Finder finder = Finder.getDeleteFinder(UserRole.class).append(" WHERE userId=:userId");
+		Finder finder = Finder.getDeleteFinder(UserRole.class).append(
+				" WHERE userId=:userId");
 
 		finder.setParam("userId", userId);
 		this.update(finder);
