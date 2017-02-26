@@ -58,6 +58,7 @@ public class TestPaperInfo extends BaseEntity {
 	 * 瞬时字段：试卷详情
 	 */
 	private List<PaperOptions> paperOptions;
+	private TestRecordInfo recordInfo;
 	/**
 	 * 瞬时字段：试卷名称
 	 */
@@ -326,5 +327,14 @@ public class TestPaperInfo extends BaseEntity {
 			return true;
 		TestPaperInfo other = (TestPaperInfo) obj;
 		return new EqualsBuilder().append(getId(), other.getId()).isEquals();
+	}
+
+	@Transient
+	public TestRecordInfo getRecordInfo() {
+		return recordInfo;
+	}
+
+	public void setRecordInfo(TestRecordInfo recordInfo) {
+		this.recordInfo = recordInfo;
 	}
 }

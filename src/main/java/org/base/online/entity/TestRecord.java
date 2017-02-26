@@ -68,6 +68,7 @@ public class TestRecord extends BaseEntity {
 	 * 试题名称
 	 */
 	private java.lang.String paper_name;
+	private TestPaper testPaper;
 	/**
 	 * 做题使用时间
 	 */
@@ -307,5 +308,14 @@ public class TestRecord extends BaseEntity {
 
 	public void setStudent_name(java.lang.String student_name) {
 		this.student_name = student_name;
+	}
+
+	@Transient
+	public TestPaper getTestPaper() {
+		return testPaper;
+	}
+
+	public void setTestPaper(TestPaper testPaper) {
+		this.testPaper = testPaper;
 	}
 }

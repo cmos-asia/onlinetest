@@ -129,6 +129,16 @@
     	试卷信息为空
     </#if>
     <script type="text/javascript">
+    
+    var startDate;
+    var endDate;
+    $(document).ready(function(){
+   		//显示倒计时
+   		startDate = Date.parse(('${((returnDatas.otherData.serverNowDate)?string('yyyy-MM-dd HH:mm:ss'))!''}').replace(/-/g, "/"));
+   		endDate = Date.parse(('${((returnDatas.otherData.serverEndTime)?string('yyyy-MM-dd HH:mm:ss'))!''}').replace(/-/g, "/"));
+   		window.setInterval(function(){ShowCountDown(startDate,endDate);}, 1000);
+   	});
+    
     	function mySelect(th){
     		$(th).parent().find('input').removeAttr("checked");
     		$(th).find('input').attr("checked","checked");
@@ -153,6 +163,43 @@
     			}
     		});
     		
+    	}
+    	
+ function ShowCountDown(startDate,endDate) { 
+    	var now = new Date(startDate).getTime();
+    	
+    	var leftTime=endDate-now; 
+    	var leftsecond = parseInt(leftTime/1000);
+    	var day = Math.floor(leftsecond/(24*60*60));
+    	var hour=Math.floor((leftsecond-day*24*60*60)/3600); 
+    	var minute=Math.floor((leftsecond-day*24*60*60-hour*3600)/60); 
+    	var second=Math.floor(leftsecond-day*24*60*60-hour*3600-minute*60);
+    	 $("#"+showCountDown).html("");
+    	if(second < 10 || minute <10 || hour<10){
+    		var str_hour = hour;
+    		var str_minute=minute;
+    		var str_second = second;
+    		if(hour < 10){
+    			str_hour="0"+hour;
+    		}
+    		if(minute < 10){
+    			str_minute="0"+minute;
+    		}
+    		if(second < 10){
+    			str_second="0"+second;
+    		}
+    		if(day==0){
+    			$("#"+showCountDown).append("<span class='bg_r color_f _times'>"+str_hour+"</span>:<span class='bg_r color_f _times'>"+str_minute+"</span>:<span class='bg_r color_f _times'>"+str_second+"</span>");
+    		}else{
+    			$("#"+showCountDown).append(day+"天 "+"<span class='bg_r color_f _times'>"+str_hour+"</span>:<span class='bg_r color_f _times'>"+str_minute+"</span>:<span class='bg_r color_f _times'>"+str_second+"</span>" );
+    		}
+    	}else{
+    		if(day==0){
+    			$("#"+showCountDown).append("<span class='bg_r color_f _times'>"+hour+"</span>:<span class='bg_r color_f _times'>"+minute+"</span>:<span class='bg_r color_f _times'>"+second);
+    		}else{
+    			$("#"+showCountDown).append("<span class='bg_r color_f _times'>"+day+"天 "+hour+"</span>:<span class='bg_r color_f _times'>"+minute+"</span>:<span class='bg_r color_f _times'>"+second); 
+    		}
+    	} 
     	}
     </script>
 </body>

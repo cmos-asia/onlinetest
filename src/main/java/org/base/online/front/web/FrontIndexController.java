@@ -500,6 +500,52 @@ public class FrontIndexController extends FrontBaseController {
 			model.addAttribute(GlobalStatic.returnDatas, returnObject);
 			return result_url;
 		}
+
+		// @Resource
+		// private ITestRecordService testRecordService;
+		// @Resource
+		// private ITestRecordInfoService testRecordInfoService;
+		TestRecord testRecord = testRecordService.findTestRecordById(recordId);
+		if (testRecord == null) {
+			model.addAttribute(GlobalStatic.returnDatas, returnObject);
+			return result_url;
+		}
+
+		// 试卷
+		TestPaper testPaper = testPaperService.findById(
+				testRecord.getPaper_id(), TestPaper.class);
+
+		// 试题信息
+		if (testPaper == null) {
+			model.addAttribute(GlobalStatic.returnDatas, returnObject);
+			return testPaper_url;
+		}
+		Subjects subjects = subjectsService.findSubjectsById(testPaper
+				.getSubjects());
+		if (subjects != null) {
+			testPaper.setSubjectsName(subjects.getName());
+		}
+
+		// 根据试卷id查找试题详情
+		List<TestPaperInfo> paperInfoRtn = getTestPaperInfoListByPaperId(testPaper
+				.getId());
+		if (CollectionUtils.isEmpty(paperInfoRtn)) {
+			testRecord.setTestPaper(testPaper);
+			returnObject.setOtherData(testRecord);
+			model.addAttribute(GlobalStatic.returnDatas, returnObject);
+			return result_url;
+		}
+
+		for (TestPaperInfo info : paperInfoRtn) {
+			TestRecordInfo recordInfo = testRecordInfoService
+					.findTestRecordInfoByPIdSidPaperId(testRecord.getId(),
+							testPaper.getId(), info.getId());
+			info.setRecordInfo(recordInfo);
+		}
+		testPaper.setTestPaperInfoList(paperInfoRtn);
+		testRecord.setTestPaper(testPaper);
+		returnObject.setOtherData(testRecord);
+		model.addAttribute(GlobalStatic.returnDatas, returnObject);
 		return result_url;
 	}
 

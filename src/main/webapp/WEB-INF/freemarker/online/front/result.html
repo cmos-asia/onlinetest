@@ -35,105 +35,105 @@
         overflow: hidden;
         }
         .st_radio{
-            position: absolute;left: 9px;top:12px;
+        position: absolute;left: 9px;top:12px;
         }
+        .detail-intro{background: #fff;}
+        #questionModule { width: 100%; min-height: 300px; background: none; overflow: hidden; position: relative; }
+        #questionModule > ul { width: 100%; height: auto; }
+        #questionModule.cross-range { margin-bottom: 20px; }
+        #questionModule.cross-range > ul { width: 100%; height: 100%; position: absolute; top: 0; left: 0; }
+        #questionModule.cross-range > ul > li { float: left; width: 100%; overflow: hidden; }
+        .pra-left-con{float: none;width: 940px;margin:0 auto;}
         </style>
         <link rel="stylesheet" href="../css/front/assets/index.css">
     </head>
     <body>
- <div class="pracontent clearfix" style="margin-top: 20px">
+           <@cmMacro.online_tab />
+           
+<#if (returnDatas.otherData??) && (returnDatas.otherData.testPaper??)>
+    <div class="pracontent clearfix" style="margin-top: 20px">
         <div class="m-examHead bor ">
             <div class="score">
-                <div class="num">90</div>
+                <div class="num">${(returnDatas.otherData.right_score)!'0'}</div>
                 <div class="ico"></div>
             </div>
             <!--试卷头信息-->
-            <h2 class="h2"> 2017年北京会计从业《财经法规》模拟卷(3) </h2>
+            <h2 class="h2"> ${(returnDatas.otherData.paper_name)!''} </h2>
             <div class="info">
-                <p>◇ 问卷描述</p>
+                <p><p>◇ 本卷科目类型为&nbsp;${(returnDatas.otherData.testPaper.subjectsName)!''}，作答时间为${(returnDatas.otherData.testPaper.answer_time)!''}分钟，总分：${(returnDatas.otherData.testPaper.total_score)!''}分</p>
             </div>
         </div>
-        <div class="dopra-con clearfix">
-            <div class="pra-left-con">
-                <!-- 练习模式做题-->
-                
-                <div id="questionModule" class="">
-                    <div class="m__ruleTitle" >
-                        <div class="m-secpart"> 单项选择题(本题型共20小题，每小题1分，共20分)</div>
-                    </div>
-                    <ul class="m__ruleQuest" data-ruleid="1756095" data-loadstate="notget">
-                        <li>
-                            <div class="subject-con bor clearfix m-question " data-examid="4082815" data-examtype="1" data-rulesid="1756095" data-answer="B" data-useranswer="" data-orderid="1" style="">
-                                <div class="subject-con" style="background:inherit">
-                                    <div class="sub-content ">
-                                        
-                                        <i class="subjec-daan" style="display: none;"></i>
-                                        
-                                        <div class="sub-dotitle">
-                                            <em>1</em>
-                                            <i>[单选题]</i>
-                                            
-                                            见票即付的汇票，持票人在出票日起(　　)内提示付款的，才产生法律效力。
-                                            
-                                        </div>
-                                        
-                                        <dl class="sub-answer  ">
-                                            
-                                            <dd class="m-question-option ">
-                                            <input name="aaa" type="radio" value="A" class="st_radio" />
-                                            <span>A.</span>10日
-                                            </dd>
-                                            
-                                            <dd class="m-question-option " data-value="B">
-                                            <input name="aaa" type="radio" value="B" class="st_radio" />
-                                            <span>B.</span>1个月
-                                            </dd>
-                                            
-                                            <dd class="m-question-option " data-value="C">
-                                            <input name="aaa" type="radio" value="C" class="st_radio" />
-                                            <span>C.</span>2个月
-                                            </dd>
-                                            
-                                            <dd class="m-question-option " data-value="D">
-                                            <input name="aaa" type="radio" value="D" class="st_radio" />
-                                            <span>D.</span>3个月<br>
-                                            </dd>
-                                            
-                                        </dl>
-                                        
-                                    </div>
+    </div>
+<div class="dopra-con clearfix">
+    <div class="pra-left-con pra-right-font16">
+        <!-- 练习模式做题-->
+        <div id="questionModule" class="" style="min-height: 604px;">
+            <div class="m__ruleTitle">
+                <div class="m-secpart"> 一、选择题</div>
+            </div>
+                        <#if (returnDatas.otherData.testPaper.testPaperInfoList??) && (returnDatas.otherData.testPaper.testPaperInfoList?size>0)>
+                                        <#list returnDatas.otherData.testPaper.testPaperInfoList as testPaperInfo>
+                    <div class="subject-con bor clearfix m-question disabled" >
+                        <div class="subject-con" style="background:inherit">
+                            <div class="sub-content sub-conanswer">
+                            <#if testPaperInfo.right_answer==testPaperInfo.recordInfo.answer_result>
+                     				<i class="subjec-daan subjec-right"></i>
+                                <#else>
+                                 	<i class="subjec-daan subjec-wrong"></i>
+                    			</#if>
+                                <div class="sub-dotitle">
+                                    <em>${testPaperInfo_index+1}</em>
+                                   <i>[${(testPaperInfo.topicTypeName)!''}，${(testPaperInfo.score)!'0'}分]</i>
+                                            ${(testPaperInfo.problem_description)!''}
                                 </div>
                                 
-                            </div>
-                        </li>
-                    </ul>
-                    
-                </div>
-            </div>
-
-            <!--右侧设置-->
-            <div class="pra-right-con">
-                <div id="m__rightPart" class="pra-right-con-sub" style="z-index: 99;">
-                    <div class="time-card f-mt20 bor">
-                        <div class="y-time">
-                            <span class="f-fl"><i></i>用时<em id="e__timer">00:00:00</em></span>
-                            <span class="btn__pause stop f-fr"><a href="javascript:;"><i></i>暂停</a></span>
-                        </div>
-                        <!--答题卡区域-->
-                        <div class="rightArea-answer clear">
-                            
-                            <div class="ft">
-                                <div class="btn btn-one"><a href="javascript:;" class="btn__nextGoon">保存进度，下次继续</a></div>
-                                <div class="btn"><a href="javascript:;" class="btn__submit">交卷</a></div>
+                                <dl class="sub-answer  sub-answer-no">
+                                     <#if (testPaperInfo.paperOptions??) && (testPaperInfo.paperOptions?size>0)>
+                                        	<#list testPaperInfo.paperOptions as paperOption>
+                                            <dd class="m-question-option" data-value="A">
+                                    			<i></i><span></span>${(paperOption.option)!''}
+                                    		</dd>
+                                        	</#list>
+                                        </#if>
+                                    <!-- right-this cho-this -->
+                                </dl>
                             </div>
                         </div>
-                        <!--答题卡区域 end-->
+                        <div class="m__answerLine refer-answer clearfix" style="display:block;">
+                            <div class="reck">
+                    			<#if testPaperInfo.right_answer==testPaperInfo.recordInfo.answer_result>
+                     				参考答案：<em class="right">${(testPaperInfo.right_answer)}</em>
+                                	您的答案：<em class="right">${(testPaperInfo.recordInfo.answer_result)}</em>
+                                <#else>
+                                 	参考答案：<em class="right">${(testPaperInfo.right_answer)}</em>
+                                	您的答案：<em class="wrong">${(testPaperInfo.recordInfo.answer_result)}</em>
+                    			</#if>            
+                            </div>
+                            <ul>
+                            </ul>
+                        </div>
                     </div>
+                    <div class="m__analyse detail-intro" style="display:block;">
+                        <div class="solution">
+                            <ul>
+                                <li>
+                                    <span class="s-jx"><i></i>参考解析：</span>
+                                    <div class="so-timu">
+                                        <div class="wenzi">【解析】${(testPaperInfo.reference_description)}<br>
+                                        </div>
+                                        
+                                    </div>
+                                </li>
+                                
+                            </ul>
+                        </div>
+                    </div>
+                    </#list>
+                    </#if>
                 </div>
-            </div>
-            <!--右侧设置 end-->
-        </div>
-        </div>
+    </div>
+</div>
+</#if>
         <@cmMacro.footer />
 	</body>
 </html>
