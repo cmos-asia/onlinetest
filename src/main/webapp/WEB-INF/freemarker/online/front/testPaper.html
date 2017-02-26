@@ -115,7 +115,7 @@
                         <div class="rightArea-answer clear">
                             <div class="ft">
                                 <!-- <div class="btn btn-one"><a href="javascript:;" class="btn__nextGoon">保存进度，下次继续</a></div> -->
-                                <div class="btn"><a href="javascript:submitForm();" class="btn__submit">交卷</a></div>
+                                <div class="btn"><a href="javascript:submitForm();" class="btn__submit" id="btn__submit">交卷</a></div>
                             </div>
                         </div>
                         <!--答题卡区域 end-->
@@ -136,6 +136,7 @@
     var startDateTimes;
     var endDateTimes;
     var usedTimes;
+    var timeID;
     $(document).ready(function(){
    		//显示倒计时
    		startDate = Date.parse(('${((returnDatas.otherData.serverNowDate)?string('yyyy-MM-dd HH:mm:ss'))!''}').replace(/-/g, "/"));
@@ -143,8 +144,7 @@
    		startDateTimes= new Date(startDate).getTime();
    		endDateTimes= new Date(endDate).getTime();
    		usedTimes=0;
-   		setInterval("ShowCountDown()",1000); 
-   		//window.setInterval(function(){ShowCountDown(startDateTimes,endDateTimes);}, 1000);
+   		timeID=window.setInterval(function(){ShowCountDown();}, 1000);
    	});
     
     	function mySelect(th){
@@ -161,6 +161,7 @@
     			type:'post',
     			data:$("#testPaperForm").serialize(),
     			dataType:'json',
+    			async:'false',
     			success:function(_json){
     				
     				if(_json.status=='success'){
@@ -175,35 +176,37 @@
     	}
     	
  function ShowCountDown() { 
+	 	startDateTimes= startDateTimes+1000;
+ 		usedTimes=usedTimes+1000;
     	var leftTime=endDateTimes-startDateTimes; 
     	if(leftTime<0){
+    		clearInterval(timeID);
     		submitForm();
-    		return;
-    	}
-    	var leftsecond = parseInt(leftTime/1000);
-    	var hour=Math.floor(leftsecond/3600); 
-    	var minute=Math.floor((leftsecond-hour*3600)/60); 
-    	var second=Math.floor(leftsecond-hour*3600-minute*60);
-    	 $("#e__timer").html("");
-    	if(second < 10 || minute <10 || hour<10){
-    		var str_hour = hour;
-    		var str_minute=minute;
-    		var str_second = second;
-    		if(hour < 10){
-    			str_hour="0"+hour;
-    		}
-    		if(minute < 10){
-    			str_minute="0"+minute;
-    		}
-    		if(second < 10){
-    			str_second="0"+second;
-    		}
-    		$("#e__timer").html(""+str_hour+":"+str_minute+":"+str_second);
+    		return ;
     	}else{
-    		$("#e__timer").html(""+hour+":"+minute+":"+second);
+    		var leftsecond = parseInt(leftTime/1000);
+        	var hour=Math.floor(leftsecond/3600); 
+        	var minute=Math.floor((leftsecond-hour*3600)/60); 
+        	var second=Math.floor(leftsecond-hour*3600-minute*60);
+        	 $("#e__timer").html("");
+        	if(second < 10 || minute <10 || hour<10){
+        		var str_hour = hour;
+        		var str_minute=minute;
+        		var str_second = second;
+        		if(hour < 10){
+        			str_hour="0"+hour;
+        		}
+        		if(minute < 10){
+        			str_minute="0"+minute;
+        		}
+        		if(second < 10){
+        			str_second="0"+second;
+        		}
+        		$("#e__timer").html(""+str_hour+":"+str_minute+":"+str_second);
+        	}else{
+        		$("#e__timer").html(""+hour+":"+minute+":"+second);
+        	}
     	}
-    	startDateTimes= startDateTimes+1000;
-    	usedTimes=usedTimes+1000;
     	}
     </script>
 </body>

@@ -279,7 +279,7 @@ public class FrontIndexController extends FrontBaseController {
 
 		// 初始数组
 		String[] arrs = new String[] { "A", "B", "C", "D", "E", "F", "G", "H",
-				"I", "J", "K", "L" };
+				"I", "J", "K", "L", "WZ" };
 		List<TestRecordInfo> recordInfoList = new ArrayList<TestRecordInfo>();
 		// 遍历答题信息，统计正确结果，插入答题记录
 		for (PaperAnswer pa : paperAnswers) {
@@ -290,7 +290,10 @@ public class FrontIndexController extends FrontBaseController {
 				int answerScore = 0;
 				// 正确答案
 				String rightResult = paperInfo.getRight_answer();
-				String answerResult = arrs[pa.getOptionId()];
+				int optionId = NumberUtils.toInt(
+						String.valueOf(pa.getOptionId()), arrs.length - 1);
+
+				String answerResult = arrs[optionId];
 				if (rightResult.equalsIgnoreCase(answerResult)) {
 					isRight = 1;
 					rightScore += paperInfo.getScore();
