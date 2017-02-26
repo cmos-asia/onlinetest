@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>在线测试中心</title>
+        <link href="./assets/nav.css" rel="stylesheet" type="text/css" />
+        <style>
+        #headerbox {
+        position: relative;
+        }
+        </style>
+        <link rel="stylesheet" href="./assets/index.css">
+        <link rel="stylesheet" href="./assets/list.css">
+        <link rel="stylesheet" href="./assets/recoad.css">
+        <link rel="stylesheet" type="text/css" href="./assets/login.css" />
+    </head>
+    <body>
+        <div id="top-wrap">
+            <div class="top-nav-wrap" id="headerbox">
+                <div class="tn-header">
+                    <div class="tn-nav">
+                    </div>
+                    <div class="tn-person-r">
+                        <!-- nologin -->
+                        <div class="tn-title" id="nologinbox"><a href="./login.html"  target="_self" class="tn-tab"><em class="denglu"></em>登录</a><b>|</b><a href="./register.html" onClick="return ghead.register();" target="_self" class="tn-tab ui-denglu">注册</a>
+                    </div>
+                    <!-- end -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="main_content clearfix">
+        <div class="main_content clearfix">
+            <div class="le-prabg test-classificon-t clearfix clear">
+                <div class="navleft clearfix">
+                    <div class="tk-box clearfix">
+                        <dl>
+                            <dd class=""><a href="javascript:void(0)"><i class="home"></i>首页</a></dd>
+                        </dl>
+                        <dl>
+                            <dt>我的题库</dt>
+                            <dd class=""><a href="javascript:void(0)"><i class="myexam"></i>开始做题</a></dd>
+                            <dd class=""><a href="javascript:void(0)"><i class="record"></i>我的记录</a></dd>
+                        </dl>
+                        <dl>
+                            <dt>个人管理</dt>
+                            <dd class="this"><a href="javascript:void(0)"><i class="myaccount"></i>账户安全</a></dd>
+                        </dl>
+                    </div>
+                </div>
+                <!--右侧中间部分-->
+                <div class="test-clawidth-more bor" id="class_frame">
+                    <div class="cap-chose bor f-mb20">
+                        <ul class="pracl-mlist">
+                            <li><a href="/tiku/history/187" class="this">账户管理</a></li>
+                        </ul>
+                        
+                    </div>
+                    <div class="pracl-dalist bor">
+                        <div class="fr regForm">
+                            <input id="captchaType" type="hidden" value="0" />
+                            <form action="javascript:void(0)" id="mobileRegisterForm">
+                                <div class="frame">
+                                    <div class="frameInput">
+                                        <label>手机号：</label>
+                                        <input class="frameInput_text" name="mobile" id="mobile" autocomplete="off" type="text" placeholder="请输入您常用的手机号码" />
+                                        <div class="frameInfo msg-box"></div>
+                                    </div>
+                                </div>
+                                <div class="frame">
+                                    <div class="frameInput">
+                                        <label>姓名：</label>
+                                        <input class="frameInput_text" name="name" id="name" autocomplete="off" type="text" placeholder="请输入您的姓名" />
+                                        <div class="frameInfo msg-box"></div>
+                                    </div>
+                                </div>
+                                <div class="frame">
+                                    <div class="frameInput">
+                                        <label>专业：</label>
+                                        <input class="frameInput_text" name="major" id="major" autocomplete="off" type="text" placeholder="请输入您的专业" />
+                                        <div class="frameInfo msg-box"></div>
+                                    </div>
+                                </div>
+                                <div class="frame">
+                                    <div class="frameInput">
+                                        <label>性别:</label>
+                                        <label><input type="radio" name="sex" value="man">&#160;&#160;&#160;&#160;男</label>
+                                        <label><input type="radio" name="sex" value="woman">&#160;&#160;&#160;&#160;女</label>
+                                        <div class="frameInfo msg-box"></div>
+                                    </div>
+                                </div>
+                                <div class="frame">
+                                    <div class="frameInput">
+                                        <label>密码：</label>
+                                        <input type="text" style="display: none;">
+                                        <input class="frameInput_text" name="password" id="password" autocomplete="off" type="password" placeholder="长度为6-20个字符" />
+                                        <a href="javascript:void(0)" class="eyesClose"></a>
+                                        <div class="frameInfo msg-box"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="frame">
+                                    <input class="submit" name="" type="submit" value="保存" />
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<script src="./common/footer.js"></script>
+</body>
+</html>
