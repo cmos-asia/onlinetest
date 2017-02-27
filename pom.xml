@@ -3,11 +3,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>org.base</groupId>
-	<artifactId>base</artifactId>
+	<artifactId>online</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
-	<name>base</name>
+	<name>online</name>
 	<url>http://git.oschina.net/chunanyong/springrain</url>
 
 	<properties>
